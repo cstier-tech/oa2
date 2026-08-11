@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -12,13 +12,16 @@ import LoginForm from './parts/login/_LoginForm.jsx';
 import Header from './parts/global/header/_Header.jsx';
 import Body from './parts/global/body/_Body.jsx';
 import Footer from './parts/global/footer/_Footer.jsx';
+import ExportToolbar from './components/ExportToolbar.jsx';
 
 
 function App() {
+  const exportRegionRef = useRef(null);
+
   return (
     <div className='page-main'>
       <Header />
-      <Body pageClass="login-page">
+      <Body ref={exportRegionRef} pageClass="login-page">
         <Row className="mt-4">
           <Col lg={5} className="m-auto">
             <Card className="shadow-sm p-3 p-md-4 mb-5 mb-md-0 login-box">
@@ -44,6 +47,7 @@ function App() {
           <Footer.Menu.Item href="#" label="Privacy" />
         </Footer.Menu>
       </Footer>
+      <ExportToolbar targetRef={exportRegionRef} />
     </div>
   )
 }
