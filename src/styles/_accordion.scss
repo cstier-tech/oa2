@@ -1,0 +1,90 @@
+﻿/// <reference path="../../../Content/shared/_variables-shared.scss" />
+/// <reference path="_variables.scss" />
+/// <reference path="../../../Content/bs4/scss/bootstrap.scss" />
+
+//
+// Accordion
+// --------------------------------------------------
+
+.accordion {
+    padding-bottom: 1px;
+    .card{
+        border: none;
+        border-radius: 0;
+        &:first-of-type{
+            .card-header{
+                border-top: 1px solid $gray-400 !important;
+            }
+        }
+    }
+
+    .card-title {
+        margin: 0;
+        position: relative;
+
+        .collapse-chevron {
+            font-size: 14px;
+            opacity: 0.6;
+            transition: transform 0.35s;
+        }
+
+        .card-title-link {
+            position: relative;
+            text-decoration: none;
+            font-weight: $font-weight-medium;
+            font-size: 1.125rem;
+            display: block;
+            padding: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            transition: background-color 0.25s, color 0.25s;
+            border-radius: 0;
+            &.collapsed {
+                color: inherit;
+            }
+
+            &:not(.collapsed) {
+                color: $primary;
+                background-color: $gray-200;
+                .collapse-chevron {
+                    opacity: 1;
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+
+        .hint {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: $font-weight-normal;
+            opacity: 0.6;
+            line-height: 1.5;
+        }
+    }
+
+    .card-header {
+        padding: 0;
+        background-color: transparent;
+        cursor: pointer;
+        border-bottom: 1px solid $gray-400 !important;
+    }
+    .card-body{
+        padding: 1.25rem;
+        border-bottom: 1px solid $gray-400 !important;
+        *:not(img, br, input, hr){
+            &:last-child{
+                margin-bottom: 0;
+            }
+            &:empty{
+                    display: none;
+                }
+            &:has(+ *:not(img, br, input, hr):empty) {
+                margin-bottom: 0;
+            }
+        }
+        
+    }
+
+}

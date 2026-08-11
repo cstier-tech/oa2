@@ -1,0 +1,1298 @@
+﻿//@import "theme.scss";
+@import "../../Flex/Content/theme.scss";
+
+div:has( > .FormbuilderColumn2){
+    &:has(.FormbuilderButtonControl){
+        padding: 0 15px;
+        flex-flow: row;
+        gap: 15px;
+        @include media-breakpoint-only(md){
+            flex-flow: column;
+            gap: 0;
+        }
+    }
+}
+
+@include media-breakpoint-down(sm){
+    .fb-column:has(.FormbuilderTabDataOuterDiv){
+        margin: 0 15px;
+    }
+}
+
+//formbuilder classes
+@mixin form-control-custom {
+    @extend .form-control;
+}
+
+@mixin form-group-custom {
+    @extend .form-group;
+}
+
+@mixin row-custom {
+    @extend .row;
+}
+
+@mixin btn-custom {
+    @extend .btn;
+}
+
+@mixin btn-primary-custom {
+    @extend .btn-primary;
+}
+
+@mixin btn-info-custom {
+    @extend .btn-info;
+}
+
+@mixin li-stage-custom {
+    //@extend .li-stage;
+}
+
+@mixin col-sm-3-custom {
+    @include make-col-ready();
+
+    @include media-breakpoint-up('sm') {
+        @include make-col(3);
+    }
+}
+
+@mixin col-sm-4-custom {
+    @include make-col-ready();
+
+    @include media-breakpoint-up('sm') {
+        @include make-col(4);
+    }
+}
+
+@mixin col-sm-6-custom {
+    @include make-col-ready();
+
+    @include media-breakpoint-up('sm') {
+        @include make-col(6);
+    }
+}
+
+@mixin col-sm-8-custom {
+    @include make-col-ready();
+
+    @include media-breakpoint-up('sm') {
+        @include make-col(8);
+    }
+}
+
+@mixin col-sm-11-custom {
+    @include make-col-ready();
+
+    @include media-breakpoint-up('sm') {
+        @include make-col(11);
+    }
+}
+
+@mixin col-sm-12-custom {
+    @include make-col-ready();
+
+    @include media-breakpoint-up('sm') {
+        @include make-col(12);
+    }
+}
+
+
+@mixin form-inline-custom {
+    @extend .form-inline;
+}
+
+///// ///// /////
+//	General
+///// ///// /////
+
+.FormbuilderHide {
+    display: none;
+}
+
+.FormbuilderNote {
+    font-size:		11px;
+	font-weight:	bold;;
+	color:			#666666;
+}
+
+///// ///// /////
+//	Button
+///// ///// /////
+
+.FormbuilderButtonOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderButtonInnerDiv {
+}
+
+.FormbuilderButtonLabel {
+    display: none;
+}
+
+.FormbuilderButtonControl {
+    @include btn-custom;
+    @include btn-primary-custom;
+    @extend .btn-block;
+}
+
+.FormbuilderButtonError {
+    color: red;
+}
+///// ///// /////
+//	Image Button
+///// ///// /////
+
+.FormbuilderImageButtonOuterDiv {
+    @include form-group-custom;
+    display: inline-block;
+}
+
+.FormbuilderImageButtonInnerDiv {
+}
+
+.FormbuilderImageButtonLabel {
+    display: none;
+}
+
+.FormbuilderImageButtonControl {
+    border: none;
+    padding: 0px;
+    cursor: pointer;
+}
+
+.FormbuilderImageButtonBackground {
+    width: 100%;
+}
+
+.FormbuilderImageButtonError {
+    color: red;
+}
+///// ///// /////
+//	label
+///// ///// /////
+
+.FormbuilderLabelOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderLabelInnerDiv {
+}
+
+.FormbuilderLabelLabel {
+}
+
+
+.FormbuilderLabelControl {
+    @include form-control-custom;
+}
+
+.FormbuilderLabelError {
+    color: red;
+}
+
+.FormbuilderLabelRequired {
+    color: red;
+}
+///// ///// /////
+//	textField
+///// ///// /////
+
+.FormbuilderTextboxOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderTextboxInnerDiv {
+}
+
+.FormbuilderTextboxLabel {
+}
+
+
+.FormbuilderTextboxControl {
+    @include form-control-custom;
+}
+
+.FormbuilderTextboxError {
+    color: red;
+}
+
+.FormbuilderTextboxRequired {
+    color: red;
+}
+.FormbuilderTextboxSubText {
+}
+
+.FormbuilderTextboxSubLabelText {
+    display: block;
+}
+
+.FormbuilderTextboxPostText {
+    line-height: 43px;
+    width: 100%;
+}
+///// ///// /////
+//	textArea
+///// ///// /////
+
+.FormbuilderTextAreaOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderTextAreaInnerDiv {
+}
+
+.FormbuilderTextAreaLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderTextAreaControl {
+    @include form-control-custom;
+}
+
+.FormbuilderTextAreaError {
+    color: $danger;
+}
+
+.FormbuilderTextAreaRequired {
+    color: $danger;
+}
+///// ///// /////
+//	DateTimePicker
+///// ///// /////
+
+.FormbuilderDateTimePickerOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderDateTimePickerInnerDiv {
+}
+
+.FormbuilderDateTimePickerLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderDateTimePickerControl {
+    @include form-control-custom;
+}
+
+.FormbuilderDateTimePickerRequired {
+    color: $danger;
+}
+
+.FormbuilderDateTimePickerError {
+    color: $danger;
+}
+
+///// ///// /////
+//	TimePicker
+///// ///// /////
+
+.FormbuilderTimePickerOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderTimePickerInnerDiv {
+}
+
+.FormbuilderTimePickerLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderTimePickerControl {
+    @include form-control-custom;
+}
+
+.FormbuilderTimePickerError {
+    color: $danger;
+}
+
+.FormbuilderTimePickerRequired {
+    color: $danger;
+}
+///// ///// /////
+//	Checkbox
+///// ///// /////
+
+.FormbuilderCheckboxOuterDiv {
+    //    display: -webkit-box;
+    @include form-group-custom;
+}
+
+.FormbuilderCheckboxInnerDiv {
+    @extend .form-check;
+}
+
+.FormbuilderCheckboxLabel {
+    @extend .form-check-label;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.FormbuilderCheckboxControl {
+    @extend .form-check-input;
+    border: none;
+}
+
+.FormbuilderCheckboxError {
+    color: $danger;
+}
+
+///// ///// /////
+//	Dropdown
+///// ///// /////
+
+.FormbuilderDropdownOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderDropdownInnerDiv {
+    //@include column-custom;
+}
+
+.FormbuilderDropdownLabel {
+    //@include control-label-custom;
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderDropdownControl {
+    @include form-control-custom;
+}
+
+.FormbuilderDropdownOptionImage {
+    width: 10%;
+    height: 10%;
+}
+
+.FormbuilderDropdownSelectedImage {
+    width: 10%;
+    height: 10%;
+}
+
+.FormbuilderDropdownError {
+    color: $danger;
+}
+
+.FormbuilderDropdownRequired {
+    color: $danger;
+}
+///// ///// /////
+//	Paragraph
+///// ///// /////
+
+.FormbuilderParagraphOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderParagraphInnerDiv {
+}
+
+.FormbuilderParagraphLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderParagraphControl {
+    @include form-group-custom;
+}
+
+.FormbuilderParagraphError {
+    color: $danger;
+}
+
+///// ///// /////
+//	ImagePicker
+///// ///// /////
+
+.FormbuilderImagePickerOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderImagePickerInnerDiv {
+}
+
+.FormbuilderImagePickerLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderImagePickerControl {
+    @include btn-custom;
+    @include btn-primary-custom;
+}
+
+.FormbuilderImagePickerError {
+    color: $danger;
+}
+
+.FormbuilderImagePickerRequired {
+    color: $danger;
+}
+
+.FormbuilderImagePickerImageCellBase {
+}
+
+.FormbuilderImagePickerImageSelectedImage {
+    width: 100px;
+    height: 100px;
+}
+
+.FormbuilderImagePickerGridImage {
+    width: 100%;
+    height: 100%;
+}
+
+.FormbuilderImagePickerGridImageTitle {
+    color: black;
+}
+///// ///// /////
+//	ImportList
+///// ///// /////
+
+.FormbuilderImportListOuterDiv {
+    @include form-group-custom;
+    width: 100%;
+    position: relative;
+    font-size: 18px;
+}
+
+.FormbuilderImportListInnerDiv {
+    @include form-control-custom;
+    display: flex;
+    width: 100%;
+    padding: 30px 10px;
+    border: 2px dashed #ccc;
+    background-color: #fff;
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+    border: 2px dashed #1abc9c;
+    padding-left: 15%;
+}
+
+.FormbuilderImportListInnerDiv:hover {
+    border: 2px dashed #1abc9c;
+    background-color: #dcc6c6;
+}
+
+
+.FormbuilderImportListLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderImportListControl {
+    @include btn-custom;
+    @include btn-primary-custom;
+    @include col-sm-4-custom;
+    width: 30%;
+    margin-top: 12px;
+}
+
+.FormbuilderImportListFile {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 25px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.FormbuilderImportListRequired {
+    color: $danger;
+}
+
+.FormbuilderImportListError {
+    color: $danger;
+}
+
+///// ///// /////
+//	UploadFile
+///// ///// /////
+
+///// ///// /////
+//	UploadFile - Fixed Version
+///// ///// /////
+
+.FormbuilderUploadFileOuterDiv {
+    @include form-group-custom;
+    width: 100%;
+    position: relative;
+    font-size: 18px;
+}
+
+.FormbuilderUploadFileInnerDiv {
+    @include form-control-custom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 120px;
+    padding: 30px 10px;
+    border: 2px dashed #1abc9c;
+    background-color: #fff;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        border: 2px dashed #16a085;
+        background-color: #f8f9fa;
+    }
+}
+
+.FormbuilderUploadFileLabel {
+    @include col-sm-12-custom;
+    margin-bottom: 10px;
+}
+
+.FormbuilderUploadBrowseControl {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1; // Ensure it's above the background but below clear button
+}
+
+.FormbuilderUploadFileControl {
+    @include col-sm-4-custom;
+    @include btn-custom;
+    @include btn-primary-custom;
+    width: 30%;
+    padding-top: 12px;
+    margin-top: 10px;
+}
+
+.FormbuilderUploadFileError {
+    color: $danger;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.FormbuilderUploadFileRequired {
+    color: $danger;
+}
+
+// File result area styling
+[id^="file-result-area-"] {
+    border: 2px solid #28a745;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-top: 10px;
+
+    .btn-danger {
+        z-index: 1000;
+        position: relative;
+        pointer-events: auto;
+
+        &:hover {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+    }
+
+    a {
+        color: #007bff;
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// Upload area specific styling
+[id^="upload-area-"] {
+    position: relative;
+
+    span {
+        pointer-events: none;
+        color: #666;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    // Drag and drop states
+    &.drag-over {
+        border-color: #2196f3 !important;
+        background-color: #e3f2fd !important;
+
+        span {
+            color: #1976d2;
+        }
+    }
+}
+
+// Progress bar styling
+[id^="progressBar-"] {
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    appearance: none;
+
+    &::-webkit-progress-bar {
+        background-color: #f0f0f0;
+        border-radius: 10px;
+    }
+
+    &::-webkit-progress-value {
+        background-color: #1abc9c;
+        border-radius: 10px;
+        transition: width 0.3s ease;
+    }
+
+    &::-moz-progress-bar {
+        background-color: #1abc9c;
+        border-radius: 10px;
+    }
+}
+
+// Status text styling
+[id^="status-"] {
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+    color: #333;
+    font-weight: 500;
+
+    &.success {
+        color: #28a745;
+    }
+
+    &.error {
+        color: #dc3545;
+    }
+}
+
+[id^="loaded_n_total-"] {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+}
+
+// File upload span styling
+[id^="fileUpload-span-"] {
+    display: block;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+    pointer-events: none;
+    user-select: none;
+}
+
+// Hidden image preview styling
+[id^="image-"] {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+// Error message styling
+[id^="error-"] {
+    margin-top: 5px;
+    font-size: 14px;
+    color: $danger;
+    display: block;
+}
+
+// Responsive adjustments
+@include media-breakpoint-down(sm) {
+    .FormbuilderUploadFileInnerDiv {
+        min-height: 100px;
+        padding: 20px 10px;
+        font-size: 16px;
+    }
+
+    .FormbuilderUploadFileControl {
+        width: 80%;
+        margin-top: 15px;
+    }
+
+    [id^="file-result-area-"] {
+        padding: 10px;
+
+        .btn-danger {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+
+    [id^="fileUpload-span-"] {
+        font-size: 14px;
+    }
+}
+
+// Animation for smooth transitions
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[id^="file-result-area-"] {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+// Focus states for accessibility
+.FormbuilderUploadBrowseControl:focus + span {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+///// ///// /////
+//	Column
+///// ///// /////
+
+.FormbuilderColumnOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderColumnInnerDiv {
+    @include form-control-custom;
+}
+
+.FormbuilderColumnLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderColumnControl {
+}
+
+.FormbuilderColumn2{
+    &:not(:has(.FormbuilderButtonControl)) {
+        //@include li-stage-custom;
+        @include col-sm-6-custom;
+    }
+    &:has(.FormbuilderButtonControl) {
+        @extend .w-100;
+    }
+}
+
+.FormbuilderColumn3 {
+    //@include li-stage-custom;
+    @include col-sm-4-custom;
+}
+
+.FormbuilderColumn4 {
+    //@include li-stage-custom;
+    @include col-sm-3-custom;
+}
+
+///// ///// /////
+//	Panel
+///// ///// /////
+
+.FormbuilderPanelLabel {
+    @include col-sm-12-custom;
+}
+
+.FormbuilderPanelOuterDiv {
+    //@include form-group-custom;
+}
+
+.FormbuilderPanelInnerDiv {
+    //@include form-control-custom;
+}
+
+.FormbuilderPanelDiv {
+    //@include li-stage-custom;
+    @include col-sm-12-custom;
+}
+
+.FormbuilderPanelControl {
+    //    @include col-sm-12-custom;
+    margin: 0px;
+    // & > div{
+    //     margin-bottom: 1rem;
+    // }
+}
+
+///// ///// /////
+//	TabData
+///// ///// /////
+
+.FormbuilderTabDataOuterDiv {
+    @include col-sm-12-custom;
+    @include li-stage-custom;
+    @extend .rounded;
+    @extend .border-top-0;
+    border: 1px solid #dee2e6 !important;
+}
+
+.FormbuilderTabHeaderDiv {
+    @include row-custom;
+    @include form-group-custom;
+}
+
+.FormbuilderTabHeaderSpan {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: -5px;
+    border-bottom: none !important;
+    @extend .select2;
+    @extend .select2-container;
+    @extend .select2-container--bootstrap;
+}
+
+.FormbuilderTabHeaderOnDiv {
+    cursor: pointer;
+    background-image: none;
+    border-top: 5px solid $primary;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.FormbuilderTabHeaderOffDiv {
+    cursor: pointer;
+    background-image: none;
+    border-top: 5px solid transparent;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.FormbuilderTabHeaderOnSpan {
+    border: 1px solid $gray-300 !important;
+    border-right-color: transparent !important;
+    border-left-color: $gray-300 !important;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 5px 0;
+    margin-left: -1px;
+    background-color: transparent !important;
+    @extend .nav-link;
+
+    &.active.show {
+        border-bottom-color: white !important;
+    }
+    text-decoration: none !important;
+}
+
+.FormbuilderTabHeaderOffSpan {
+    border: 1px solid $gray-300 !important;
+    border-right-color: transparent !important;
+    border-left-color: $gray-300 !important;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 5px 0;
+    margin-left: -1px;
+    text-decoration: none !important;
+}
+
+a.FormbuilderTabHeaderOnSpan.active {
+    border-bottom-color: transparent !important;
+}
+
+a.FormbuilderTabHeaderOffSpan.active {
+    border-bottom-color: transparent !important;
+}
+///// ///// /////
+//	HiddenField
+///// ///// /////
+
+.FormbuilderHiddenFieldOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderHiddenFieldInnerDiv {
+}
+
+.FormbuilderHiddenFieldLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderHiddenFieldControl {
+    @include form-group-custom;
+}
+
+.FormbuilderHiddenFieldError {
+    color: $danger;
+}
+
+.FormbuilderHiddenFieldRequired {
+    color: $danger;
+}
+///// ///// /////
+//	VirtualControl
+///// ///// /////
+
+.FormbuilderVirtualControlOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderVirtualControlInnerDiv {
+}
+
+.FormbuilderVirtualControlLabel {
+    @include col-sm-12-custom;
+}
+
+.FormbuilderVirtualControl {
+    @include form-group-custom;
+}
+
+.FormbuilderVirtualControlError {
+    color: $danger;
+}
+
+///// ///// /////
+//	ChiliItem
+///// ///// /////
+
+.FormbuilderChiliItemOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderChiliItemInnerDiv {
+}
+
+.FormbuilderChiliItemLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderChiliItemControl {
+    @include form-group-custom;
+}
+
+.FormbuilderChiliItemError {
+    color: $danger;
+}
+
+///// ///// /////
+//	CheckboxGroup
+///// ///// /////
+
+.FormbuilderCheckboxGroupOuterDiv {
+    @include form-group-custom;
+    @include row-custom;
+    padding-left: 15px;
+}
+
+.FormbuilderCheckboxGroupInnerDiv {
+}
+
+.FormbuilderCheckboxGroupLabel {
+}
+
+.FormbuilderCheckboxGroupCheckGroup {
+    padding-left: 5px;
+}
+
+.FormBuilderCheckboxGroupCheckControlBox {
+    cursor: pointer;
+}
+
+.FormbuilderCheckboxGroupCheckControl {
+    margin-bottom: .5rem;
+}
+
+.FormbuilderCheckboxGroupControl {
+}
+
+.FormbuilderCheckboxGroupCheckControlLabelActive {
+    padding-left: 5px;
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+}
+
+.FormbuilderCheckboxGroupCheckControlLabelInactive {
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.FormbuilderCheckboxGroupError {
+    color: $danger;
+}
+
+
+
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormBuilderCheckboxGroupCheckControlBox {
+    display: none;
+}
+
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControl {
+    display: inline-block;
+}
+
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelActive{
+	background: #00694C;
+	border: 1px solid #00694C;
+	border-radius: 12px;
+	padding: 4px 8px;
+	margin: 0px 8px 8px 0px;
+	color: #FFFFFF;
+}
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelActive:hover{
+	background: #A0EBC8;
+	border: 1px solid #A0EBC8;
+	color: #000000;
+}
+
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelActive:after{
+//	content: " X";
+    content: url('../Media/Controls/cbList_X.png');
+}
+
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelActive:hover:after{
+//	content: " X";
+    content: url('../Media/Controls/cbList_X_hover.png');
+}
+
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelInactive{
+	background: #FFFFFF;
+	border: 1px solid #343333;
+	border-radius: 12px;
+	padding: 4px 8px;
+	margin: 0px 8px 8px 0px;
+	color: #000000;
+}
+
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelInactive:hover{
+	background: #A0EBC8;
+	border: 1px solid #A0EBC8;
+	color: #000000;
+}
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelInactive:after{
+//	content: " ＋";
+    content: url('../Media/Controls/cbList_plus.png');
+}
+.FormbuilderCheckboxGroupInnerDiv_Rackcards .FormbuilderCheckboxGroupCheckControlLabelInactive:hover:after{
+//	content: " ＋";
+    content: url('../Media/Controls/cbList_plus_hover.png');
+}
+.FormbuilderCheckboxGroupInnerDiv_Rackcards:after{
+   position:absolute; width:0; height:0; overflow:hidden; z-index:-1; // hide images
+   content:url('../Media/Controls/cbList_X.png') url('../Media/Controls/cbList_X_hover.png') url('../Media/Controls/cbList_plus_hover.png');
+}
+///Product
+.FormbuilderProductOuterDiv {
+    @include form-group-custom;
+    //    @include row-custom;
+}
+
+.FormbuilderProductInnerDiv {
+}
+
+.FormbuilderProductLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderProductControl {
+}
+
+.FormbuilderProductError {
+    color: $danger;
+}
+///// ///// /////
+//	RadioGroup
+///// ///// /////
+
+.FormbuilderRadioGroupOuterDiv {
+    @include form-group-custom;
+    @include row-custom;
+}
+
+.FormbuilderRadioGroupInnerDiv {
+    @include col-sm-12-custom;
+    display: block;
+}
+
+.FormbuilderRadioGroupLabel {
+    //@include control-label-custom;
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderRadioGroupControl {
+    border: none;
+    display: block;
+}
+
+.FormbuilderRadioGroupError {
+    color: $danger;
+}
+
+///// ///// /////
+//	CartModule
+///// ///// /////
+.FormbuilderCartModuleLabel {
+    @include col-sm-12-custom;
+}
+
+.FormbuilderCartModuleOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderCartModuleInnerDiv {
+}
+
+.FormbuilderCartModuleControl {
+}
+
+.FormbuilderCartModuleError {
+    color: $danger;
+}
+
+///// ///// /////
+//	Image
+///// ///// /////
+
+.FormbuilderImageOuterDiv {
+    
+    //    @include row-custom;
+    //    border: solid;
+    //    border-color: black;
+    //    border-width: 1px;
+    
+    img{
+        border: solid 1px $gray-300;
+        @include form-group-custom;
+        @include media-breakpoint-up(sm){
+            &:last-of-type{
+                margin-bottom: 0;
+            }
+        }
+
+    }
+}
+
+.FormbuilderImageInnerDiv {
+    height: 100%;
+}
+
+.FormbuilderImageLabel {
+    //    @include col-sm-12-custom;
+    display: none;
+}
+
+.FormbuilderImageControl {
+    //    @include form-group-custom;
+    min-height: 200px;
+    width: 100%;
+}
+
+.FormbuilderImageError {
+    display: none;
+}
+
+///// ///// /////
+//	Html
+///// ///// /////
+
+.FormbuilderHtmlOuterDiv {
+    @include form-group-custom;
+    //    @include row-custom;
+}
+
+.FormbuilderHtmlInnerDiv {
+}
+
+.FormbuilderHtmlLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderHtmlControl {
+}
+
+.FormbuilderHtmlError {
+    color: $danger;
+}
+
+///// ///// /////
+//	dynamic
+///// ///// /////
+
+.FormbuilderDynamicOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderDynamicInnerDiv {
+}
+
+.FormbuilderDynamicLabel {
+    //    @include col-sm-12-custom;
+}
+
+.FormbuilderDynamicControl {
+    @include form-control-custom;
+}
+
+.FormbuilderDynamicError {
+    color: $danger;
+}
+
+.FormbuilderDynamicRequired {
+    color: $danger;
+}
+//xmpie control
+.FormbuilderXmpieProofOuterDiv {
+    @include form-group-custom;
+}
+
+.FormbuilderXmpieProofInnerDiv {
+}
+//button
+.FormbuilderXmpieProofControl {
+    @include btn-custom;
+    @include btn-primary-custom;
+}
+
+.FormbuilderXmpieProofTermDiv {
+}
+//checkbox label
+.FormbuilderXmpieProofTermLabel {
+    font-weight: 700;
+}
+//checkbox
+.FormbuilderXmpieProofTermControl {
+    transform: scale(1.6); /* make it 60% bigger */
+    -webkit-transform: scale(1.6);
+    -moz-transform: scale(1.6);
+    -ms-transform: scale(1.6);
+    -o-transform: scale(1.6);
+    margin: 5px; /* add some spacing so it doesn’t overlap text */
+    cursor: pointer;
+}
+//mix css
+.pd-offer-actions-container {
+    display: block;
+}

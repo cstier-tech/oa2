@@ -1,0 +1,31 @@
+﻿
+
+.permission-group {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.permission-group-header {
+    background-color: #f8f9fa;
+    cursor: pointer;
+    padding: 0.75rem 1.25rem;
+    transition: background-color 0.2s ease;
+}
+
+    .permission-group-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .permission-group-header h5 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #495057;
+        margin: 0;
+    }
+
+    .permission-group-header .toggle-icon {
+        transition: transform 0.2s ease;
+        margin-right: 0.5rem;
+    }
+
