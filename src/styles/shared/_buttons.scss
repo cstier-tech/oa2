@@ -34,27 +34,27 @@ $btn-size-sm: $input-height-sm;
 // --------------------------------------------------
 
 .btn-secondary.hover {
-	@extend .btn-secondary, :hover;
+	&:hover { @extend .btn-secondary; }
 }
 
 .btn-primary.hover {
-	@extend .btn-primary, :hover;
+	&:hover { @extend .btn-primary; }
 }
 
 .btn-warning.hover {
-	@extend .btn-warning, :hover;
+	&:hover { @extend .btn-warning; }
 }
 
 .btn-danger.hover {
-	@extend .btn-danger, :hover;
+	&:hover { @extend .btn-danger; }
 }
 
 .btn-info.hover {
-	@extend .btn-info, :hover;
+	&:hover { @extend .btn-info; }
 }
 
 .btn-success.hover {
-	@extend .btn-success, :hover;
+	&:hover { @extend .btn-success; }
 }
 
 
@@ -471,34 +471,34 @@ $btn-size-sm: $input-height-sm;
 
 .btn.btn-to-danger {
 	&:not([disabled]):not(.disabled):hover {
-		@extend .btn-danger, :hover;
+		@extend .btn-danger;
 		> i { opacity: 1; }
 	}
 
 	&:focus:hover {
-		@extend .btn-danger, :focus;
+		@extend .btn-danger;
 		> i { opacity: 1; }
 	}
 
 	&:not([disabled]):not(.disabled):active,
 	.show > &.dropdown-toggle {
-		@extend .btn-danger, :active;
+		@extend .btn-danger;
 		> i { opacity: 1; }
 	}
 }
 
 .btn.btn-to-primary {
 	&:not([disabled]):not(.disabled):hover {
-		@extend .btn-primary, :hover;
+		@extend .btn-primary;
 	}
 
 	&:focus:hover {
-		@extend .btn-primary, :focus;
+		@extend .btn-primary;
 	}
 
 	&:not([disabled]):not(.disabled):active,
 	.show > &.dropdown-toggle {
-		@extend .btn-primary, :active;
+		@extend .btn-primary;
 	}
 }
 

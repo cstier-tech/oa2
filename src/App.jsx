@@ -11,7 +11,7 @@ import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 // import Form from 'react-bootstrap/Form';
 
-// import LoginForm from './parts/login/_LoginForm.jsx';
+import LoginForm from './parts/login/_LoginForm.jsx';
 
 // import ColorCard from './components/ColorCard';
 
@@ -19,7 +19,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 function App() {
   return (
     <>
-      {/* <div id="content-wrapper">
+      <div id="content-wrapper">
         <Container as="section" id="content">
           <Row id="content-body">
             <Col id="content-center" lg={12}>
@@ -37,6 +37,7 @@ function App() {
                           Credentials, please.
                         </h3>
                         <hr className="d-none d-md-block"></hr>
+                        <LoginForm />
                       </div>
                     </Card>
 
@@ -46,7 +47,7 @@ function App() {
             </Col>
           </Row>
         </Container>
-      </div> */}
+      </div>
     </>
   )
 }
