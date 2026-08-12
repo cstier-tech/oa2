@@ -12,14 +12,14 @@ import {
 
 function Menubar() {
     return (
-        <div className="menubar-section d-none d-lg-block menubar-inverse">
+        <div className="menubar-section d-none d-lg-block menubar-light">
             <div className="container menubar-container">
                 <nav className="menubar navbar navbar-slide">
                     <nav className="menubar-group ml-auto">
                         <div className="cms-menu cms-menu-linklist" data-menu-name="faq">
                             <ul className="list-unstyled">
                                 <li>
-                                    <a href="https://95percentgroup.lcpstore.com/faq" className="menu-link menubar-link">
+                                    <a href="/faq" className="menu-link menubar-link">
                                         <span>FAQ</span>
                                     </a>
                                 </li>

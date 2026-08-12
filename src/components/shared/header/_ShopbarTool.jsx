@@ -5,7 +5,7 @@ import { faStar, faHeart } from '@fortawesome/free-regular-svg-icons';
 
 const TOOL_CONFIG = {
     cart: {
-        icon: faCartShopping,
+        icon: 'bag',
         href: '/cart',
         summaryHref: '/shoppingcart/cartsummary?cart=True&wishlist=False&compare=False',
         bindTo: 'CartItemsCount',
@@ -15,7 +15,7 @@ const TOOL_CONFIG = {
         labelSm: 'Basket',
     },
     favorites: {
-        icon: faStar,
+        icon: 'star',
         href: '/favorites',
         summaryHref: '/favorites/favoritessummary',
         bindTo: 'FavoritesItemsCount',
@@ -25,7 +25,7 @@ const TOOL_CONFIG = {
         labelSm: 'Items',
     },
     wishlist: {
-        icon: faHeart,
+        icon: 'heart',
         href: '/wishlist',
         summaryHref: '/wishlist/wishlistsummary',
         bindTo: 'WishlistItemsCount',
@@ -44,7 +44,7 @@ function ShopbarTool({ tool }) {
         <div className="shopbar-tool" id={`shopbar-${tool}`} data-target={`#${tool}-tab`}>
             <a href={config.href} className="shopbar-button navbar-toggler" data-toggle="offcanvas" data-summary-href={config.summaryHref} data-autohide="true" data-placement="right" data-fullscreen="false" data-disablescrolling="true" data-target={offcanvasTarget}>
                 <span className="shopbar-button-icon">
-                    <FontAwesomeIcon icon={config.icon} />
+                    <i className={`icm icm-${config.icon}`}></i>
                     <span className={`badge badge-pill label-cart-amount badge-warning`} data-bind-to={config.bindTo}>0</span>
                 </span>
                 <span className="shopbar-button-label">

@@ -27,66 +27,13 @@
     letter-spacing: 0.01em;
 }
 
-.export-toolbar-copy-btn {
-    flex: 0 0 auto;
-    padding: 6px 16px;
-    border: none;
-    border-radius: 4px;
-    background: #3b82f6;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-}
 
-.export-toolbar-copy-btn:hover {
-    background: #2563eb;
-}
-
-.export-toolbar-copy-btn[data-copied="true"] {
-    background: #16a34a;
-}
-
-.export-toolbar-minimize-btn {
-    flex: 0 0 auto;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.12);
-    color: #f4f4f4;
-    font-size: 16px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.export-toolbar-minimize-btn:hover {
-    background: rgba(255, 255, 255, 0.22);
-}
 
 .export-toolbar-fab {
-    position: fixed;
+    position: fixed !important;
     right: 20px;
     bottom: 20px;
     z-index: 2147483000;
-    width: 48px;
-    height: 48px;
-    border: none;
-    border-radius: 50%;
-    background: #3b82f6;
-    color: #fff;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.export-toolbar-fab:hover {
-    background: #2563eb;
 }
 
 .export-toolbar-preview {

@@ -20,14 +20,14 @@ function Megamenu({ children }) {
     )
 }
 
-function MegamenuItem({ id, label, href, children }) {
+function MegamenuItem({ id, label, children, onClick, value }) {
     const [show, setShow] = useState(false);
     const hasDropdown = Boolean(children);
 
     if (!hasDropdown) {
         return (
             <Nav.Item as="li" id={`main-nav-item-${id}`}>
-                <Nav.Link href={href} className="menu-link">{label}</Nav.Link>
+                <Nav.Link className="menu-link" onClick={() => onClick(value)}>{label}</Nav.Link>
             </Nav.Item>
         );
     }
@@ -46,8 +46,8 @@ function MegamenuItem({ id, label, href, children }) {
     )
 }
 
-function MegamenuDropdownItem({ href, label }) {
-    return <NavDropdown.Item href={href}>{label}</NavDropdown.Item>;
+function MegamenuDropdownItem({ label }) {
+    return <NavDropdown.Item >{label}</NavDropdown.Item>;
 }
 
 Megamenu.Item = MegamenuItem;

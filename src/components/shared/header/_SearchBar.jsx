@@ -10,7 +10,7 @@ function SearchBar() {
                 <Form.Control type="text" className="instasearch-term" name="q" placeholder="What are you looking for?" data-instasearch="true" data-minlength="2" data-showthumbs="true" data-url="/instantsearch" data-origin="Search/Search" autoComplete="off" />
 
                 <Button type="submit" variant="primary" className="btn-icon instasearch-button" title="Search">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    <i className='icm icm-magnifier instasearch-icon'></i>
                 </Button>
             </Form>
         </div >

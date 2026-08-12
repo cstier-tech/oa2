@@ -1,33 +1,27 @@
-import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
-function AdminLogin({ onSSOLogin }) {
+
+function Login({}) {
     return (
-        <>
+        <Form>
             <Form.Group className="form-group">
                 <InputGroup size='lg' className='has-icon'>
                     <Form.Control placeholder="Email" type="email" id="Email" className="email" data-gtm-form-interact-field-id="0" />
                     <span className="input-group-icon text-muted">
-                        <FontAwesomeIcon icon={faHeart} />
+                        <i className='icm icm-user'></i>
                     </span>
                 </InputGroup>
             </Form.Group>
-
             <Form.Group className="form-group">
                 <InputGroup size='lg' className='has-icon'>
                     <Form.Control placeholder="Password" type="password" id="Password" className="password" data-gtm-form-interact-field-id="1" />
                     <span className="input-group-icon text-muted">
-                        <FontAwesomeIcon icon={faHeart} />
+                        <i className='icm icm-shield'></i>
                     </span>
                 </InputGroup>
             </Form.Group>
-
             <div className='form-group d-flex justify-content-between'>
                 <Form.Check
                     type="checkbox"
@@ -39,19 +33,11 @@ function AdminLogin({ onSSOLogin }) {
                     <a href="#">Forgot password?</a>
                 </div>
             </div>
-
-            <Button variant="primary" size="lg" type="submit" className="btn-block">
+            <Button variant="primary" size="lg" type='button' className="btn-block">
                 Log In
             </Button>
-            <div className="sso-login text-center mt-3">
-                <a href="#" onClick={(e) => { e.preventDefault(); onSSOLogin(); }}>Log in with SSO</a>
-            </div>
-        </>
+        </Form>
     )
 }
 
-AdminLogin.propTypes = {
-    onSSOLogin: PropTypes.func.isRequired,
-};
-
-export default AdminLogin;
+export default Login;

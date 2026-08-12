@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { html as beautifyHtml } from 'js-beautify';
 import './ExportToolbar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCode, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const BEAUTIFY_OPTIONS = {
     indent_size: 4,
@@ -36,7 +38,7 @@ function formatExportRegion(node) {
 function ExportToolbar({ targetRef }) {
     const [html, setHtml] = useState('');
     const [copied, setCopied] = useState(false);
-    const [minimized, setMinimized] = useState(false);
+    const [minimized, setMinimized] = useState(true);
     const copiedTimeoutRef = useRef(null);
 
     const refresh = useCallback(() => {
@@ -77,12 +79,12 @@ function ExportToolbar({ targetRef }) {
         return (
             <button
                 type="button"
-                className="export-toolbar-fab"
+                className="export-toolbar-fab btn btn-icon btn-circle btn-3d btn-warning btn-lg"
                 data-no-export
                 onClick={() => setMinimized(false)}
                 title="Open Developer Handoff HTML export"
             >
-                {'</>'}
+                <FontAwesomeIcon icon={faCode} />
             </button>
         )
     }
@@ -91,11 +93,11 @@ function ExportToolbar({ targetRef }) {
         <div className="export-toolbar" data-no-export>
             <div className="export-toolbar-bar">
                 <span className="export-toolbar-label">
-                    Developer Handoff — Copy the HTML below to use in Razor Pages
+                    Copy the HTML below to use in Razor Pages
                 </span>
                 <button
                     type="button"
-                    className="export-toolbar-copy-btn"
+                    className="export-toolbar-copy-btn btn btn-info btn-sm"
                     data-copied={copied}
                     onClick={handleCopy}
                 >
@@ -103,12 +105,12 @@ function ExportToolbar({ targetRef }) {
                 </button>
                 <button
                     type="button"
-                    className="export-toolbar-minimize-btn"
+                    className="export-toolbar-minimize-btn btn btn-sm btn-icon btn-gray"
                     onClick={() => setMinimized(true)}
                     title="Minimize"
                     aria-label="Minimize developer handoff panel"
                 >
-                    &minus;
+                    <FontAwesomeIcon icon={faMinus} />
                 </button>
             </div>
             <pre className="export-toolbar-preview"><code>{html}</code></pre>

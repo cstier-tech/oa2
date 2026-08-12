@@ -58,6 +58,5 @@ function FooterMenuItem({ href, label }) {
 Footer.Menu = FooterMenu;
 Footer.Menu.Item = FooterMenuItem;
 
-// export { FooterMenu, FooterMenuItem };
 
 export default Footer;
