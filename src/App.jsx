@@ -8,13 +8,14 @@ import Alert from 'react-bootstrap/Alert';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Header from './components/shared/header/_Header.jsx';
-import Body from './components/shared/_Body.jsx';
+import Body from './components/shared/_Main.jsx';
 import Footer from './components/shared/footer/_Footer.jsx'
-import ExportToolbar from './components/ExportToolbar.jsx';
+import ExportToolbar from './components/exportTools/ExportToolbar.jsx';
 import LoginBoxCard from './components/customer/login/_LoginBoxCard.jsx';
 import SSOLoginPage from './components/customer/login/_SSOLoginPage.jsx';
 import DefaultLoginPage from './components/customer/login/_DefaultLoginPage.jsx';
 import RegisterPage from './components/customer/register/_RegisterPage.jsx';
+import Layout from './components/shared/_Layout.jsx';
 
 
 function App() {
@@ -26,8 +27,7 @@ function App() {
   }
 
   return (
-    <div className='page-main'>
-      <Header activePage={activePage} onNavClick={handleNavClick} />
+    <Layout activePage={activePage} onNavClick={handleNavClick} >
       {activePage === 'sso-login' &&
         <SSOLoginPage activePage={activePage} onNavClick={handleNavClick} />
       }
@@ -37,19 +37,13 @@ function App() {
       {activePage === 'register' &&
         <RegisterPage activePage={activePage} onNavClick={handleNavClick} />
       }
-      <Footer>
-        <Footer.Menu title="Information">
-        </Footer.Menu>
-        <Footer.Menu title="Service">
-          <Footer.Menu.Item href="#" label="Contact Us" />
-        </Footer.Menu>
-        <Footer.Menu title="Company">
-          <Footer.Menu.Item href="#" label="Privacy" />
-        </Footer.Menu>
-      </Footer>
+
       {/* need to fix what is showing in the panel, its currently not updating */}
       {/* <ExportToolbar targetRef={exportRegionRef} /> */}
-    </div>
+    </Layout>
+
+
+
   )
 }
 

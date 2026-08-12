@@ -1,4 +1,4 @@
-import Body from '../../shared/_Body';
+import Body from '../../shared/_Main';
 import Register from './_RegisterForm';
 
 function RegisterPage({ activePage, onNavClick }){

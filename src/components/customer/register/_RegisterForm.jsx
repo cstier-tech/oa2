@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 function Register() {
     return (
         <Form>
-            <fieldset class="content-group">
+            <fieldset className="content-group">
                 <legend><span>Your Personal Details</span></legend>
 
                 <Form.Group as={Row} className='form-group' controlId="FirstName">
@@ -45,7 +45,7 @@ function Register() {
             </fieldset>
 
 
-            <fieldset class="content-group">
+            <fieldset className="content-group">
                 <legend><span>Your Password</span></legend>
 
                 <Form.Group as={Row} className='form-group' controlId="Password">
@@ -68,7 +68,7 @@ function Register() {
 
             </fieldset>
 
-            <fieldset class="content-group">
+            <fieldset className="content-group">
                 <legend><span>Company Details</span></legend>
 
                 <Form.Group as={Row} className='form-group' controlId="Company">
