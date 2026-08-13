@@ -1,9 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 
-function Login({}) {
+function Login({ onLogin }) {
+    const navigate = useNavigate();
+
+    // No real credential check here - this is a simulated login. onLogin flips the isLoggedIn
+    // state that lives in App, which is what makes ProtectedRoute let "/" render HomePage;
+    // navigate('/') just takes the user there immediately instead of waiting for a click on "/".
+    const handleLogin = () => {
+        onLogin();
+        navigate('/');
+    };
+
     return (
         <Form>
             <Form.Group className="form-group">
@@ -33,7 +44,7 @@ function Login({}) {
                     <a href="#">Forgot password?</a>
                 </div>
             </div>
-            <Button variant='primary' size='lg' type='button' className='btn-block'>
+            <Button variant='primary' size='lg' type='button' className='btn-block' onClick={handleLogin}>
                 Log In
             </Button>
         </Form>
