@@ -1,10 +1,10 @@
-import Button from '../components/controls/Button';
+import CircleButton from '../components/controls/CircleButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/theme.scss';
 
 export default {
-  title: 'Button',
-  component: Button,
+  title: 'CircleButton',
+  component: CircleButton,
   argTypes: {
     variant: {
       control: 'select',
@@ -20,9 +20,6 @@ export default {
         'link',
       ],
     },
-    showIcon: {
-      control: 'boolean',
-    },
     size: {
       control: 'select',
       options: [
@@ -37,7 +34,6 @@ export default {
 export const Primary = {
   args: {
     variant: 'primary',
-    children: 'Primary Button',
     size: 'default',
   },
 };
@@ -45,7 +41,6 @@ export const Primary = {
 export const Secondary = {
   args: {
     variant: 'secondary',
-    children: 'Secondary Button',
     size: 'default',
   },
 };
@@ -53,8 +48,6 @@ export const Secondary = {
 export const Info = {
   args: {
     variant: 'info',
-    children: 'Info Button',
     size: 'default',
-    showIcon: true,
   },
 };

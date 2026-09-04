@@ -38,6 +38,7 @@
     "prop-types": "latest",
     "sass-embedded": "^1.100.0",
     "storybook": "^10.5.7",
+    "typescript": "^7.0.2",
     "vite": "^8.2.0"
   }
 }

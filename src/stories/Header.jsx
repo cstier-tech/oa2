@@ -1,9 +1,10 @@
 import React from 'react';
-
+//import { Button } from 'react-bootstrap';
+import './header.css';
 import PropTypes from 'prop-types';
 
-import { Button } from './Button';
-import './header.css';
+import Button from 'react-bootstrap/Button';
+
 
 export const Header = ({ user = null, onLogin, onLogout, onCreateAccount }) => (
   <header>
