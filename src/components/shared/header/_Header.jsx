@@ -12,6 +12,7 @@ function Header() {
                 <Megamenu.Item id="2" label="SSO Login" to="/sso-login" />
                 <Megamenu.Item id="2" label="SSO Redirect" to="/redirected-to-sso" />
                 <Megamenu.Item id="2" label="Admin Only" to="/admin-login" />
+                <Megamenu.Item id="2" label="Replacement Request Form" to="/replacement-request-form" />
                 {/* <Megamenu.Item id="3" label="Category 3" /> */}
                 {/* <Megamenu.Item id="4" label="Category 4" >
                     <Megamenu.Item.DropdownItem id="5" label="Sub Category 1" />

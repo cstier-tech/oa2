@@ -22,6 +22,7 @@ import PlainLayout from './components/shared/_PlainLayout.jsx';
 import RedirectSimulation from './components/customer/login/_RedirectSimulation.jsx';
 import ProtectedRoute from './components/shared/_ProtectedRoute.jsx';
 import HomePage from './components/home/_HomePage.jsx';
+import ReplacementRequest from './components/forms/ReplacementRequest.tsx';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route path="/sso-login" element={<SSOLoginPage onLogin={() => setIsLoggedIn(true)} />} />
         <Route path="/regular-login" element={<DefaultLoginPage onLogin={() => setIsLoggedIn(true)} />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/replacement-request-form" element={<ReplacementRequest />} />
       </Route>
 
       {/* Sibling of the layout route above, not nested inside it, so it renders on its own -
