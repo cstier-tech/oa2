@@ -22,7 +22,7 @@ import PlainLayout from './components/shared/_PlainLayout.jsx';
 import RedirectSimulation from './components/customer/login/_RedirectSimulation.jsx';
 import ProtectedRoute from './components/shared/_ProtectedRoute.jsx';
 import HomePage from './components/home/_HomePage.jsx';
-import ReplacementRequest from './components/forms/ReplacementRequest.tsx';
+import ReplacementRequest from './components/forms/ReplacementRequest/ReplacementRequest.tsx';
 
 
 function App() {
