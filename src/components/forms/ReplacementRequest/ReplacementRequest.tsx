@@ -1,111 +1,112 @@
 import React, { useState } from 'react'
-import { Button, Card, Col, Container, InputGroup, Row, Table, Modal, Alert } from 'react-bootstrap'
+import { Button, Col, Container, InputGroup, Row, Modal, FormGroup } from 'react-bootstrap'
 import Form from '../../controls/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import IconButton from '../../controls/IconButton'
-import { Select2 } from "select2-react-component";
+import Select from 'react-select'
+import Switch from '../../controls/Switch'
 
 const OMS_OPTIONS = [
-    'Select One',
-    'American Regent',
-    'Covista Business Development',
-    'Continuum',
-    'OSH - Heart Health',
-    'ReSound',
-    'Perficient',
-    '95 Percent Group',
-    'AAD',
-    'ABOMS',
-    'Adtalem Marketing',
-    'Adtalem Work Force Solutions (MRC)',
-    'AGA',
-    'American University of the Caribbean (AUC)',
-    'Andrea Goldman Design',
-    'APHON',
-    'Aspen Dental',
-    'August Jackson',
-    'Banner Life Sciences',
-    'Beltone',
-    'Blue Chip',
-    'Chamberlain Marketing (CUCC)',
-    'City Colleges Of Chicago (CCC)',
-    'City of Hope (CTCA)',
-    'ClearChoice',
-    'Columbia College',
-    'Core Change',
-    'Council of Tall Buildings and Urban Habitats (CTBUH)',
-    'CVS Careside',
-    'Dairy Queen',
-    'DEC (Division for Early Childhood)',
-    'Diamond Fulfillment Solutions',
-    'DMG MORI',
-    'eDoc',
-    'Equity Lifestyle Investments',
-    'Federal Reserve',
-    'Fresenius Kabi',
-    'Global Electronics Association (IPC)',
-    'Grassroots',
-    'Guitar Center',
-    'Horizon',
-    'IKEA',
-    'Integrative Therapeutics Inc',
-    'Jetcraft',
-    'Kimball International (National Office Furniture)',
-    'La Cornue',
-    'Labor Solutions',
-    'LCP',
-    'Lightwave',
-    'Lincoln International,LLC',
-    'Link Logistics',
-    'Lovet',
-    'Lynx',
-    'Methode Electronics Inc',
-    'Middleby Corp.',
-    'Mitsubishi Electric Automation',
-    'Morningstar',
-    'Motorola',
-    'National Marine',
-    'Northwestern Alumni',
-    'Oak Street Health (OSH)',
-    'OCC',
-    'Optimas',
-    'Other',
-    'Overture Promotions',
-    'Pfizer',
-    'PharmaCann',
-    'Ross University',
-    'Ross Vet',
-    'Rubicon-OSH',
-    'Snap-on',
-    'Story Financial',
-    'StrataTech',
-    'Sun Chemical',
-    'Supply Logic',
-    'TAG',
-    'TerSera',
-    'Tricoci University',
-    'Twin Health',
-    'TWS',
-    'Valent BioSciences',
-    'Videojet Technologies Inc',
-    'Viking Range',
-    'Vive',
-    'Walden',
-    'Wellnow',
-    'Wilson Sporting Goods',
-    'Wonderlic',
-    'test company',
-    'Safe-Guard',
-    'Sourdough Enzo',
-    'Esteve',
-    'Haydon',
+    { value: 'Select One', label: 'Select One' },
+    { value: 'American Regent', label: 'American Regent' },
+    { value: 'Covista Business Development', label: 'Covista Business Development' },
+    { value: 'Continuum', label: 'Continuum' },
+    { value: 'OSH - Heart Health', label: 'OSH - Heart Health' },
+    { value: 'ReSound', label: 'ReSound' },
+    { value: 'Perficient', label: 'Perficient' },
+    { value: '95 Percent Group', label: '95 Percent Group' },
+    { value: 'AAD', label: 'AAD' },
+    { value: 'ABOMS', label: 'ABOMS' },
+    { value: 'Adtalem Marketing', label: 'Adtalem Marketing' },
+    { value: 'Adtalem Work Force Solutions (MRC)', label: 'Adtalem Work Force Solutions (MRC)' },
+    { value: 'AGA', label: 'AGA' },
+    { value: 'American University of the Caribbean (AUC)', label: 'American University of the Caribbean (AUC)' },
+    { value: 'Andrea Goldman Design', label: 'Andrea Goldman Design' },
+    { value: 'APHON', label: 'APHON' },
+    { value: 'Aspen Dental', label: 'Aspen Dental' },
+    { value: 'August Jackson', label: 'August Jackson' },
+    { value: 'Banner Life Sciences', label: 'Banner Life Sciences' },
+    { value: 'Beltone', label: 'Beltone' },
+    { value: 'Blue Chip', label: 'Blue Chip' },
+    { value: 'Chamberlain Marketing (CUCC)', label: 'Chamberlain Marketing (CUCC)' },
+    { value: 'City Colleges Of Chicago (CCC)', label: 'City Colleges Of Chicago (CCC)' },
+    { value: 'City of Hope (CTCA)', label: 'City of Hope (CTCA)' },
+    { value: 'ClearChoice', label: 'ClearChoice' },
+    { value: 'Columbia College', label: 'Columbia College' },
+    { value: 'Core Change', label: 'Core Change' },
+    { value: 'Council of Tall Buildings and Urban Habitats (CTBUH)', label: 'Council of Tall Buildings and Urban Habitats (CTBUH)' },
+    { value: 'CVS Careside', label: 'CVS Careside' },
+    { value: 'Dairy Queen', label: 'Dairy Queen' },
+    { value: 'DEC (Division for Early Childhood)', label: 'DEC (Division for Early Childhood)' },
+    { value: 'Diamond Fulfillment Solutions', label: 'Diamond Fulfillment Solutions' },
+    { value: 'DMG MORI', label: 'DMG MORI' },
+    { value: 'eDoc', label: 'eDoc' },
+    { value: 'Equity Lifestyle Investments', label: 'Equity Lifestyle Investments' },
+    { value: 'Federal Reserve', label: 'Federal Reserve' },
+    { value: 'Fresenius Kabi', label: 'Fresenius Kabi' },
+    { value: 'Global Electronics Association (IPC)', label: 'Global Electronics Association (IPC)' },
+    { value: 'Grassroots', label: 'Grassroots' },
+    { value: 'Guitar Center', label: 'Guitar Center' },
+    { value: 'Horizon', label: 'Horizon' },
+    { value: 'IKEA', label: 'IKEA' },
+    { value: 'Integrative Therapeutics Inc', label: 'Integrative Therapeutics Inc' },
+    { value: 'Jetcraft', label: 'Jetcraft' },
+    { value: 'Kimball International (National Office Furniture)', label: 'Kimball International (National Office Furniture)' },
+    { value: 'La Cornue', label: 'La Cornue' },
+    { value: 'Labor Solutions', label: 'Labor Solutions' },
+    { value: 'LCP', label: 'LCP' },
+    { value: 'Lightwave', label: 'Lightwave' },
+    { value: 'Lincoln International,LLC', label: 'Lincoln International,LLC' },
+    { value: 'Link Logistics', label: 'Link Logistics', },
+    { value: 'Lovet', label: 'Lovet' },
+    { value: 'Lynx', label: 'Lynx' },
+    { value: 'Methode Electronics Inc', label: 'Methode Electronics Inc' },
+    { value: 'Middleby Corp.', label: 'Middleby Corp.' },
+    { value: 'Mitsubishi Electric Automation', label: 'Mitsubishi Electric Automation' },
+    { value: 'Morningstar', label: 'Morningstar' },
+    { value: 'Motorola', label: 'Motorola' },
+    { value: 'National Marine', label: 'National Marine' },
+    { value: 'Northwestern Alumni', label: 'Northwestern Alumni' },
+    { value: 'Oak Street Health (OSH)', label: 'Oak Street Health (OSH)' },
+    { value: 'OCC', label: 'OCC' },
+    { value: 'Optimas', label: 'Optimas' },
+    { value: 'Other', label: 'Other' },
+    { value: 'Overture Promotions', label: 'Overture Promotions' },
+    { value: 'Pfizer', label: 'Pfizer' },
+    { value: 'PharmaCann', label: 'PharmaCann' },
+    { value: 'Ross University', label: 'Ross University' },
+    { value: 'Ross Vet', label: 'Ross Vet' },
+    { value: 'Rubicon-OSH', label: 'Rubicon-OSH' },
+    { value: 'Snap-on', label: 'Snap-on' },
+    { value: 'Story Financial', label: 'Story Financial' },
+    { value: 'StrataTech', label: 'StrataTech' },
+    { value: 'Sun Chemical', label: 'Sun Chemical' },
+    { value: 'Supply Logic', label: 'Supply Logic' },
+    { value: 'TAG', label: 'TAG' },
+    { value: 'TerSera', label: 'TerSera' },
+    { value: 'Tricoci University', label: 'Tricoci University' },
+    { value: 'Twin Health', label: 'Twin Health' },
+    { value: 'TWS', label: 'TWS' },
+    { value: 'Valent BioSciences', label: 'Valent BioSciences' },
+    { value: 'Videojet Technologies Inc', label: 'Videojet Technologies Inc' },
+    { value: 'Viking Range', label: 'Viking Range' },
+    { value: 'Vive', label: 'Vive' },
+    { value: 'Walden', label: 'Walden' },
+    { value: 'Wellnow', label: 'Wellnow' },
+    { value: 'Wilson Sporting Goods', label: 'Wilson Sporting Goods' },
+    { value: 'Wonderlic', label: 'Wonderlic' },
+    { value: 'test company', label: 'test company' },
+    { value: 'Safe-Guard', label: 'Safe-Guard' },
+    { value: 'Sourdough Enzo', label: 'Sourdough Enzo' },
+    { value: 'Esteve', label: 'Esteve' },
+    { value: 'Haydon', label: 'Haydon' },
 ]
 
 const FAKE_ITEMS_TO_REPLACE = [
     {
         offerID: 'V2-BHPOSTCARD',
-        description: '	Behavioral Health Postcard',
+        description: 'Behavioral Health Postcard',
         qty: 125,
         packQty: 25,
     },
@@ -189,64 +190,79 @@ const FAKE_ITEMS_TO_REPLACE = [
     },
 ]
 
-const REPLACEMENT_OPTIONS = [
+const itemsToShow = FAKE_ITEMS_TO_REPLACE.map((item) => (
+    { label: `${item.description} | ${item.offerID} | qty: ${item.qty}`, value: `${item.offerID} | ${item.description}`, qty: item.qty, packQty: item.packQty }
+))
+
+console.log(itemsToShow)
+
+type ReplacementOption = {
+    label: string
+    value: string
+}
+
+type ReplacementOptionGroup = ReplacementOption & {
+    options?: ReplacementOption[]
+}
+
+const REPLACEMENT_OPTIONS: ReplacementOptionGroup[] = [
     {
         label: 'Shipping Error',
-        name: 'ShippingError',
-        subOptions: [
+        value: 'ShippingError',
+        options: [
             {
                 label: 'Damaged in Transit',
-                name: 'DamagedInTransit'
+                value: 'DamagedInTransit'
             },
             {
                 label: 'Lost Shipment',
-                name: 'LostShipment'
+                value: 'LostShipment'
             },
         ]
     },
     {
         label: 'Order Entry Error',
-        name: 'OrderEntryError',
-        subOptions: [
+        value: 'OrderEntryError',
+        options: [
             {
                 label: 'Wrong Item Entered',
-                name: 'WrongItemEntered'
+                value: 'WrongItemEntered'
             },
         ]
     },
     {
         label: 'Printing/Bindery Error',
-        name: 'PrintingBinderyError'
+        value: 'PrintingBinderyError'
     },
     {
         label: 'Picking/Packing Error',
-        name: 'PickingPackingError',
-        subOptions: [
+        value: 'PickingPackingError',
+        options: [
             {
                 label: 'Wrong Item(s) Sent',
-                name: 'WrongItemsSent'
+                value: 'WrongItemsSent'
             },
             {
                 label: 'Missing Item(s)',
-                name: 'MissingItems'
+                value: 'MissingItems'
             },
         ]
     },
     {
         label: 'Other',
-        name: 'Other'
+        value: 'Other'
     },
 ]
 
 const SHIPPING_METHODS = [
-    { label: '2 Day', name: '2day', },
-    { label: 'Ground', name: 'ground', },
-    { label: 'Overnight', name: 'overnight', },
+    { label: '2 Day', value: '2day', },
+    { label: 'Ground', value: 'ground', },
+    { label: 'Overnight', value: 'overnight', },
 ]
 
 const ACCOUNTS = [
-    'LCP',
-    'Customer',
+    { label: 'LCP', value: 'LCP' },
+    { label: 'Customer', value: 'Customer' }
 ]
 
 function ReplacementRequest() {
@@ -254,69 +270,21 @@ function ReplacementRequest() {
 
     const [orderId, setOrderId] = useState<string>('')
 
-    const [validOrderId, setValidOrderId] = useState<string>('')
-
     const [searchedOrderId, setSearchedOrderId] = useState<boolean>(false)
-    const handleIsValid = (value: string) => {
-        const result =
-            value === ''
-                ? 'empty'
-                : value.includes("x")
-                    ? 'invalid'
-                    : 'valid'
-        setValidOrderId(result)
-    }
 
-    type SelectedSubReason = {
-        label: string
-        name: string
-    }
-    type SelectedReason = {
-        label: string
-        name: string
-        subOptions: SelectedSubReason[]
+    type SelectedReason = ReplacementOption & {
+        name?: string
+        subOptions: {
+            name: string
+            label: string
+        }[]
     }
     const [reasons, setReasons] = useState<SelectedReason[]>([])
-    const toggleReason = (option: typeof REPLACEMENT_OPTIONS[number]) => {
-        setReasons((prev) => {
-            // prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]
-            const exists = prev.some((reason) => reason.name === option.name)
-            if (exists) {
-                return prev.filter((reason) => reason.name !== option.name)
-            }
-            return [
-                ...prev,
-                {
-                    label: option.label,
-                    name: option.name,
-                    subOptions: [],
-                },
-            ]
-        })
-    }
-    const toggleSubReason = (
-        parent: typeof REPLACEMENT_OPTIONS[number],
-        subOption: { label: string; name: string }
-    ) => {
-        setReasons((prev) =>
-            prev.map((reason) => {
-                if (reason.name !== parent.name) {
-                    return reason
-                }
-                const exists = reason.subOptions.some(
-                    (selected) => selected.name == subOption.name
-                )
-                return {
-                    ...reason,
-                    subOptions: exists
-                        ? reason.subOptions.filter(
-                            (selected) => selected.name !== subOption.name
-                        )
-                        : [...reason.subOptions, subOption]
-                }
-            })
-        )
-    }
+
+    const flatOptions: ReplacementOption[] = REPLACEMENT_OPTIONS.flatMap((group) =>
+        group.options ? group.options : [{ label: group.label, value: group.value }]
+    )
+
 
     const updateOtherReason = (value: string) => {
         setReasons((previous) =>
@@ -339,14 +307,20 @@ function ReplacementRequest() {
 
 
     type ItemToReplace = {
-        description: string
-        offerID: string
+        label: string
+        value: string
         qty: number
         packQty: number
     }
 
 
-    const [itemToReplace, setItemToReplace] = useState<ItemToReplace>()
+    const [itemToReplace, setItemToReplace] = useState<ItemToReplace>({label: '', value: '', qty: 0, packQty: 0})
+
+    const qtyToReplaceOptions = Array.from(
+        { length: itemToReplace.qty / itemToReplace.packQty },
+        (_, index) => ({label: `${(index + 1) * itemToReplace.packQty}`, value: (index + 1) * itemToReplace.packQty})
+    )
+
 
     const [qtyToReplace, setQtyToReplace] = useState<number>()
 
@@ -360,7 +334,7 @@ function ReplacementRequest() {
 
     const [account, setAccount] = useState<string>('')
 
-    const [returnRequired, setReturnRequired] = useState<string>('')
+    const [returnRequired, setReturnRequired] = useState<boolean>(false)
 
     const [supportingDocs, setSupportingDocs] = useState<string>('')
 
@@ -368,262 +342,319 @@ function ReplacementRequest() {
     const [showEmail, setShowEmail] = useState(false);
 
     const handleCloseEmail = () => setShowEmail(false);
-    const handleShowEmail = () => setShowEmail(true);
-
-    const [validated, setValidated] = useState<boolean>(false)
-    const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    const handleSearchOrderId = () => {
+        if (oms !== '' && orderId !== '') {
+            setSearchedOrderId(true)
+        }
     }
 
-    setValidated(true);
-    handleShowEmail
-  };
+    // const [validated, setValidated] = useState<boolean>(false)
+    const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+        // const form = event.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        // }
+
+        // setValidated(true);
+        // handleShowEmail
+        event.preventDefault();
+        setShowEmail(true);
+    };
 
     return (
         <Container>
             <Row>
-                <Col lg='8' className='m-auto'>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                        <Form.Group controlId='oms'>
-                            <Form.Label>OMS</Form.Label>
-                            <Form.Control as='select' required value={oms} onChange={(e) => setOms(e.target.value)}>
-                                {OMS_OPTIONS.map((name) => (
-                                    <option key={name} value={name}>{name}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
+                <Col className='m-auto'>
+                    <Form onSubmit={handleSubmit}>
+                        <FormGroup className='form-group form-row' as={Row}>
+                            <Col sm={12}>
+                                <Form.Label>Order Lookup</Form.Label>
+                            </Col>
+                            <Col sm={4}>
 
-                        <Form.Group controlId='orderNumber'>
-                            <Form.Label>Order ID</Form.Label>
-                            <InputGroup hasValidation>
-                                <Form.Control isInvalid type='text' placeholder='Enter order id from selected OMS' required value={orderId} onChange={(e) => setOrderId(e.target.value)} />
-                                
-                                <div className='input-group-append'>
-                                    <IconButton variant='secondary' onClick={() => handleIsValid(orderId)}>
-                                        <FontAwesomeIcon icon={faSearch} />
-                                    </IconButton>
-                                </div>
-                                <Form.Control.Feedback type='invalid'>
-                                    Please enter an order ID
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                            
-                        </Form.Group>
+                                <Select
+                                    classNames={{
+                                        clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
+                                        container: () => 'select2-container--bootstrap',
+                                        control: () => 'input-group border-0 select2-selection select2-selection--multiple',
+                                        input: () => '',
+                                        placeholder: () => 'text-muted',
+                                        dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
+                                        valueContainer: () => 'form-control border-right-0',
+                                        indicatorSeparator: () => 'd-none',
+                                        indicatorsContainer: () => 'input-group-append',
+                                        multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
+                                        multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
+                                        multiValueLabel: () => 'pr-2 pl-0',
+                                        menuList: () => 'select2-results__options',
+                                        option: () => 'select2-results__option',
+                                    }}
+                                    options={OMS_OPTIONS}
+                                    value={OMS_OPTIONS.find((option) => option.value === oms) ?? null}
+                                    onChange={(option) => setOms(option?.value ?? '')}
+                                />
+                            </Col>
+                            <Col className='col-sm'>
+                                <Form.Control type='text' placeholder='Enter order id from selected OMS' required value={orderId} onChange={(e) => setOrderId(e.target.value)} />
+                            </Col>
+                            <Col className='col-sm-auto'>
+                                <IconButton variant='secondary' onClick={() => handleSearchOrderId()}>
+                                    <FontAwesomeIcon icon={faSearch} />
+                                </IconButton>
+                            </Col>
 
-                        
-                            <Table borderless size='sm' className='list-group-item-success'>
-                                <tbody>
-                                    <tr className='small'>
-                                    <td><strong>Order ID:</strong></td>
-                                    <td>{orderId}</td>
-                                    <td><strong>Order Date:</strong></td>
-                                    <td>09/01/2026 02:07 PM</td>
-                                </tr>
-                                <tr className='small'>
-                                    <td><strong>Reference #:</strong></td>
-                                    <td>802</td>
-                                    <td><strong>Status:</strong></td>
-                                    <td>Processed Backordered Shipped</td>
-                                </tr>
-                                <tr className='small'>
-                                    <td><strong>Ordered By: </strong></td>
-                                    <td>Chitova Whetstone
-                                        Oak Street Health - Soundview<br />
-                                        1555 Westchester Ave<br />
-                                        Bronx, NY 10472-2910<br />
-                                        United States<br />
-                                        Phone: (718) 765-6367<br />
-                                        Email: chitova.whetstone@oakstreethealth.com</td>
-                                    <td><strong>Ship To: </strong></td>
-                                    <td>Chitova Whetstone
-                                        Oak Street Health - Soundview<br />
-                                        1555 Westchester Ave<br />
-                                        Bronx, NY 10472-2910<br />
-                                        United States<br />
-                                        Phone: (718) 765-6367<br />
-                                        Email: chitova.whetstone@oakstreethealth.com</td>
-                                </tr>
-                                </tbody>
-                                
-                            </Table>
-                            <Alert variant='danger'>
-                                Order {orderId} Not Found
-                            </Alert>
-                           
-                        
+                        </FormGroup>
+                        <hr className='my-4' />
 
-                        <Form.Group controlId='item'>
-                            <Form.Label>Item to Replace</Form.Label>
-                            <Form.Control as='select' required value={itemToReplace?.offerID ?? ''}
-                                onChange={(e) => {
-                                    const selectedItem = FAKE_ITEMS_TO_REPLACE.find(
-                                        (item) => item.offerID === e.target.value
-                                    )
-                                    setItemToReplace(selectedItem)
-                                }}
-                            >
-                                <option value=''>Select One</option>
-                                {FAKE_ITEMS_TO_REPLACE.map((item) => (
-                                    <option key={item.offerID} value={item.offerID}>{`SKU: ${item.offerID} | DESC: ${item.description} | QTY: ${item.qty}`}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-                        {itemToReplace && (
-                            <Form.Group>
-                                <Form.Label>Qty to Replace</Form.Label>
 
-                                {/* <Form.Control
-                                    type='number'
-                                    value={qtyToReplace ?? ''}
-                                    min='0'
-                                    max={itemToReplace.qty}
-                                    step={itemToReplace.packQty}
-                                    onChange={handleQtyToReplace}
-                                /> */}
-                                <Form.Control
-                                    as="select"
-                                    value={qtyToReplace ?? ''}
-                                    onChange={(e) => setQtyToReplace(Number(e.target.value))}
-                                >
-                                    <option value="">Select quantity</option>
-
-                                    {Array.from(
-                                        { length: itemToReplace.qty / itemToReplace.packQty + 1 },
-                                        (_, index) => (index + 1) * itemToReplace.packQty
-                                    ).map((quantity) => (
-                                        <option key={quantity} value={quantity}>
-                                            {quantity}
-                                        </option>
-                                    ))}
-                                </Form.Control>
-                                {/* <Form.Text className='muted'>Max qty that can be returned for this item is <strong>{itemToReplace.qty}</strong>.</Form.Text> */}
-                            </Form.Group>
-                        )}
-                        <div className='form-group'>
-                            <Form.Check id='replaceWithDifferentSku'>
-                                <Form.Check.Input checked={replaceWithDifferentSku} onChange={(e) => setReplaceWithDifferentSku(e.target.checked)} />
-                                <Form.Check.Label>Replace with different SKU?</Form.Check.Label>
-                            </Form.Check>
-                        </div>
-                        {replaceWithDifferentSku &&
-                            <Form.Group>
-                                <Form.Label>SKU to replace {itemToReplace?.offerID} with: </Form.Label>
-                                <InputGroup>
-                                    <Form.Control type='text' placeholder='Search SKU' required value={skuToReplaceWith} onChange={(e) => setSkuToReplaceWith(e.target.value)} />
-                                    <div className='input-group-append'>
-                                        <IconButton variant='secondary'>
-                                            <FontAwesomeIcon icon={faSearch} />
-                                        </IconButton>
-                                    </div>
-                                </InputGroup>
-                            </Form.Group>
-                        }
-                        <div className='form-group'>
-                            <label>Reason for Replacement</label>
-                            {REPLACEMENT_OPTIONS.map((opt) => {
-                                const selectedReason = reasons.find(
-                                    (reason) => reason.name === opt.name
-                                )
-                                return (
-                                    <div key={opt.name}>
-                                        <Form.Check id={opt.name}>
-                                            <Form.Check.Input type='checkbox' onChange={() => toggleReason(opt)} />
-                                            <Form.Check.Label>{opt.label}</Form.Check.Label>
-                                        </Form.Check>
-                                        <div className='ml-3'>
-                                            {selectedReason && opt.subOptions?.map((subOpt) => (
-                                                <Form.Check key={subOpt.name} id={subOpt.name}>
-                                                    <Form.Check.Input type='checkbox' onChange={() => toggleSubReason(opt, subOpt)} />
-                                                    <Form.Check.Label>{subOpt.label}</Form.Check.Label>
-                                                </Form.Check>
+                        {searchedOrderId &&
+                            <>
+                                <h4>Replacement Request for order {orderId}</h4>
+                                <Form.Group controlId='item' as={Row}>
+                                    <Form.Label column sm={4}>Item to Replace</Form.Label>
+                                    <Col sm={8}>
+                                        {/* <Form.Control as='select' required value={itemToReplace?.offerID ?? ''}
+                                            onChange={(e) => {
+                                                const selectedItem = FAKE_ITEMS_TO_REPLACE.find(
+                                                    (item) => item.offerID === e.target.value
+                                                )
+                                                setItemToReplace(selectedItem)
+                                            }}
+                                        >
+                                            <option value=''>Select One</option>
+                                            {FAKE_ITEMS_TO_REPLACE.map((item) => (
+                                                <option key={item.offerID} value={item.offerID}>{`SKU: ${item.offerID} | DESC: ${item.description} | QTY: ${item.qty}`}</option>
                                             ))}
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                            {reasons.some((reason) => reason.name === 'Other') &&
-                                <Form.Group>
-                                    <Form.Label>Specify Other</Form.Label>
-                                    <Form.Control type='text' value={otherReason} onChange={(e) => updateOtherReason(e.target.value)} />
+                                        </Form.Control> */}
+                                        <Select
+                                            classNames={{
+                                                clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
+                                                container: () => 'select2-container--bootstrap',
+                                                control: () => 'input-group border-0 select2-selection select2-selection--multiple',
+                                                input: () => '',
+                                                placeholder: () => 'text-muted',
+                                                dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
+                                                valueContainer: () => 'form-control border-right-0',
+                                                indicatorSeparator: () => 'd-none',
+                                                indicatorsContainer: () => 'input-group-append',
+                                                multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
+                                                multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
+                                                multiValueLabel: () => 'pr-2 pl-0',
+                                                menuList: () => 'select2-results__options',
+                                                option: () => 'select2-results__option',
+                                            }}
+                                            options={itemsToShow}
+                                            value={itemsToShow.find((option) => option === itemToReplace) ?? null}
+                                            onChange={(option) => setItemToReplace(option ?? undefined)}
+                                        />
+                                    </Col>
                                 </Form.Group>
-                            }
-                        </div>
 
-                        <Form.Group controlId='requestedBy'>
-                            <Form.Label>Requested By</Form.Label>
-                            <Form.Control type='text' value={requestedBy} onChange={(e) => setRequestedy(e.target.value)} />
-                        </Form.Group>
+                                {itemToReplace && (
+                                    <Form.Group as={Row}>
+                                        <Form.Label column sm={4}>Qty to Replace</Form.Label>
+                                        <Col sm={8}>
+                                        {/* <Form.Control
+                                            as="select"
+                                            value={qtyToReplace ?? ''}
+                                            onChange={(e) => setQtyToReplace(Number(e.target.value))}
+                                        >
+                                            <option value="">Select quantity</option>
+
+                                            {Array.from(
+                                                { length: itemToReplace.qty / itemToReplace.packQty },
+                                                (_, index) => (index + 1) * itemToReplace.packQty
+                                            ).map((quantity) => (
+                                                <option key={quantity} value={quantity}>
+                                                    {quantity}
+                                                </option>
+                                            ))}
+                                        </Form.Control> */}
+
+                                        <Select 
+                                        classNames={{
+                                                clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
+                                                container: () => 'select2-container--bootstrap',
+                                                control: () => 'input-group border-0 select2-selection select2-selection--multiple',
+                                                input: () => '',
+                                                placeholder: () => 'text-muted',
+                                                dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
+                                                valueContainer: () => 'form-control border-right-0',
+                                                indicatorSeparator: () => 'd-none',
+                                                indicatorsContainer: () => 'input-group-append',
+                                                multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
+                                                multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
+                                                multiValueLabel: () => 'pr-2 pl-0',
+                                                menuList: () => 'select2-results__options',
+                                                option: () => 'select2-results__option',
+                                            }}
+                                            options={qtyToReplaceOptions}
+                                            value={qtyToReplaceOptions.find((option) => option.value === qtyToReplace) ?? null}
+                                            onChange={(option) => setQtyToReplace(option?.value ?? undefined)}
+                                        />
+                                        </Col>
+                                    </Form.Group>
+
+                                )}
+
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={4}>Replace with different SKU?</Form.Label>
+                                    <Col sm={8}>
+                                        <Switch name='replace' checked={replaceWithDifferentSku} onChange={(e) => setReplaceWithDifferentSku(e.target.checked)} togglerFor='replaceWithDifferentSku' />
+                                    </Col>
+                                </Form.Group>
+
+                                {replaceWithDifferentSku &&
+                                    <Form.Group as={Row}>
+                                        <Form.Label column sm={4}>SKU to replace with: </Form.Label>
+                                        <Col sm={8}><InputGroup>
+                                            <Form.Control type='text' placeholder='Search SKU' required value={skuToReplaceWith} onChange={(e) => setSkuToReplaceWith(e.target.value)} />
+                                            <div className='input-group-append'>
+                                                <IconButton variant='secondary'>
+                                                    <FontAwesomeIcon icon={faSearch} />
+                                                </IconButton>
+                                            </div>
+                                        </InputGroup></Col>
+                                    </Form.Group>
+
+                                }
+
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={4}>Reason for Replacement</Form.Label>
+                                    <Col sm={8}>
+                                        <Select
+                                            classNames={{
+                                                clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
+                                                container: () => 'select2-container--bootstrap',
+                                                control: () => 'input-group border-0 select2-selection select2-selection--multiple',
+                                                input: () => '',
+                                                placeholder: () => 'text-muted',
+                                                dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
+                                                valueContainer: () => 'form-control border-right-0',
+                                                indicatorSeparator: () => 'd-none',
+                                                indicatorsContainer: () => 'input-group-append',
+                                                multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
+                                                multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
+                                                multiValueLabel: () => 'pr-2 pl-0',
+                                                menuList: () => 'select2-results__options',
+                                                option: () => 'select2-results__option',
+                                            }}
+                                            isMulti
+                                            options={flatOptions}
+                                            value={flatOptions.filter((option) => reasons.some((reason) => reason.value === option.value))}
+                                            onChange={(options) =>
+                                                setReasons(
+                                                    options
+                                                        ? options.map((option) => ({
+                                                            ...option,
+                                                            name: option.value,
+                                                            subOptions: [],
+                                                        }))
+                                                        : []
+                                                )
+                                            }
+                                        />
+                                    </Col>
+                                </Form.Group>
+
+                                {reasons.some((reason) => reason.name === 'Other') && (
+                                    <Form.Group as={Row}>
+                                        <Form.Label column sm={4}>Specify Other</Form.Label>
+                                        <Col sm={8}>
+                                            <Form.Control
+                                                type='text'
+                                                value={otherReason}
+                                                onChange={(e) => updateOtherReason(e.target.value)}
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                )}
+
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={4}>Requested By</Form.Label>
+                                    <Col sm={8}><Form.Control type='text' value={requestedBy} onChange={(e) => setRequestedy(e.target.value)} /></Col>
+                                </Form.Group>
+
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={4}>Shipping Method</Form.Label>
+                                    <Col sm={8}>
+                                        <Select
+                                            classNames={{
+                                                clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
+                                                container: () => 'select2-container--bootstrap',
+                                                control: () => 'input-group border-0 select2-selection select2-selection--multiple',
+                                                input: () => '',
+                                                placeholder: () => 'text-muted',
+                                                dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
+                                                valueContainer: () => 'form-control border-right-0',
+                                                indicatorSeparator: () => 'd-none',
+                                                indicatorsContainer: () => 'input-group-append',
+                                                multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
+                                                multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
+                                                multiValueLabel: () => 'pr-2 pl-0',
+                                                menuList: () => 'select2-results__options',
+                                                option: () => 'select2-results__option',
+                                            }}
+                                            options={SHIPPING_METHODS}
+                                            value={SHIPPING_METHODS.find((option) => option.value === shippingMethod) ?? null}
+                                            onChange={(option) => setShippingMethod(option?.value ?? '')}
+                                        />
+                                    </Col>
+                                </Form.Group>
+
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={4}>Account to bill</Form.Label>
+                                    <Col sm={8}>
+                                        <Select
+                                            classNames={{
+                                                clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
+                                                container: () => 'select2-container--bootstrap',
+                                                control: () => 'input-group border-0 select2-selection select2-selection--multiple',
+                                                input: () => '',
+                                                placeholder: () => 'text-muted',
+                                                dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
+                                                valueContainer: () => 'form-control border-right-0',
+                                                indicatorSeparator: () => 'd-none',
+                                                indicatorsContainer: () => 'input-group-append',
+                                                multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
+                                                multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
+                                                multiValueLabel: () => 'pr-2 pl-0',
+                                                menuList: () => 'select2-results__options',
+                                                option: () => 'select2-results__option',
+                                            }}
+                                            options={ACCOUNTS}
+                                            value={ACCOUNTS.find((option) => option.value === account) ?? null}
+                                            onChange={(option) => setAccount(option?.value ?? '')}
+                                        />
+                                    </Col>
+                                </Form.Group>
+
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={4}>Return required</Form.Label>
+                                    <Col sm={8}>
+                                        <Switch name='return' checked={returnRequired} onChange={(e) => setReturnRequired(e.target.checked)} togglerFor='returnRequired' />
+                                    </Col>
+                                </Form.Group>
+
+                                <Form.Group as={Row}>
+                                    <Form.Label column sm={4}>Supporting Documents</Form.Label>
+                                    <Col sm={8}>
+                                        <label>
+
+                                            <input type='file' multiple className='' />
+                                        </label>
 
 
-                        <Form.Group id='shipmethod'>
-                            <Form.Label>Shipping Method</Form.Label>
-                            <div>
-                                {SHIPPING_METHODS.map((method) => (
-                                    <Form.Check
-                                        key={method.name}
-                                        inline
-                                        label={method.label}
-                                        name='ship-method'
-                                        type='radio'
-                                        id={method.name}
-                                        value={method.name}
-                                        checked={shippingMethod === method.name}
-                                        onChange={(e) => setShippingMethod(e.target.value)}
-                                    />
-                                ))}
-                            </div>
-                        </Form.Group>
+                                    </Col>
+                                </Form.Group>
+                                <Button type='submit'>Submit</Button>
+                            </>
 
-                        <Form.Group id='account'>
-                            <Form.Label>Account to Charge</Form.Label>
-                            <div>
-                                {ACCOUNTS.map((acct) => (
-                                    <Form.Check
-                                        key={acct}
-                                        inline
-                                        label={acct}
-                                        name='account'
-                                        type='radio'
-                                        id={acct}
-                                        value={acct}
-                                        checked={account === acct}
-                                        onChange={(e) => setAccount(e.target.value)}
-                                    />
-                                ))}
-                            </div>
-                        </Form.Group>
-
-                        <Form.Group id='returnRequired'>
-                            <Form.Label>Return Required?</Form.Label>
-                            <div>
-                                {['Yes', 'No'].map((v) => (
-                                    <Form.Check
-                                        key={v}
-                                        inline
-                                        label={v}
-                                        name='return'
-                                        type='radio'
-                                        id={v}
-                                        value={v}
-                                        checked={returnRequired === v}
-                                        onChange={(e) => setReturnRequired(e.target.value)}
-                                    />
-                                ))}
-                            </div>
-
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Supporting Documents</Form.Label>
-                            <br />
-                            <Form.Control type='file' value={supportingDocs} onChange={(e) => setSupportingDocs(e.target.value)} className='border-0 p-0' />
-                        </Form.Group>
+                        }
 
                     </Form>
-                    <Button type='submit'>Submit</Button>
+
                 </Col>
             </Row>
 
@@ -666,6 +697,51 @@ function ReplacementRequest() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+
+
+            <Modal show={showEmail} onHide={handleCloseEmail} size="lg">
+                <Modal.Header>
+                    <Modal.Title>Please review the replacement request for {oms}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {oms && <p><strong>OMS: </strong>{oms}</p>}
+                    {orderId && <p><strong>Order ID: </strong>{orderId}</p>}
+                    {itemToReplace && <p><strong>Item to Replace: </strong>{itemToReplace.offerID}</p>}
+                    {reasons.length > 0 &&
+                        <>
+                            <strong>Reason for Request: </strong>
+                            <ul>
+                                {reasons.map((reason) => (
+                                    <li key={reason.name}>{reason.label}
+                                        <ul>
+                                            {reason.subOptions.map((subReason) => (
+                                                <li key={subReason.name}>
+                                                    {subReason.label}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+
+                    }
+                    {requestedBy && <p><strong>Originally Requested By: </strong>{requestedBy}</p>}
+                    {shippingMethod && <p><strong>Shipping Method: </strong>{shippingMethod}</p>}
+                    {account && <p><strong>Shipping Account: </strong>{account}</p>}
+                    {returnRequired && <p><strong>Return Required?: </strong>{returnRequired}</p>}
+                    {supportingDocs && <p><strong>Supporting Docs: </strong>{supportingDocs}</p>}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleCloseEmail}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
+
         </Container>
     )
 }
@@ -723,3 +799,53 @@ export default ReplacementRequest
                                 ))}
                             </tbody>
                         </Table> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <Table borderless size='sm' className='list-group-item-success'>
+                            <tbody>
+                                <tr className='small'>
+                                    <td><strong>Order ID:</strong></td>
+                                    <td>{orderId}</td>
+                                    <td><strong>Order Date:</strong></td>
+                                    <td>09/01/2026 02:07 PM</td>
+                                </tr>
+                                <tr className='small'>
+                                    <td><strong>Reference #:</strong></td>
+                                    <td>802</td>
+                                    <td><strong>Status:</strong></td>
+                                    <td>Processed Backordered Shipped</td>
+                                </tr>
+                                <tr className='small'>
+                                    <td><strong>Ordered By: </strong></td>
+                                    <td>Chitova Whetstone
+                                        Oak Street Health - Soundview<br />
+                                        1555 Westchester Ave<br />
+                                        Bronx, NY 10472-2910<br />
+                                        United States<br />
+                                        Phone: (718) 765-6367<br />
+                                        Email: chitova.whetstone@oakstreethealth.com</td>
+                                    <td><strong>Ship To: </strong></td>
+                                    <td>Chitova Whetstone
+                                        Oak Street Health - Soundview<br />
+                                        1555 Westchester Ave<br />
+                                        Bronx, NY 10472-2910<br />
+                                        United States<br />
+                                        Phone: (718) 765-6367<br />
+                                        Email: chitova.whetstone@oakstreethealth.com</td>
+                                </tr>
+                            </tbody>
+
+                        </Table>*/}

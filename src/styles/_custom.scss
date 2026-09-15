@@ -139,3 +139,24 @@ $theme-colors: map-merge(
   ),
   $theme-colors
 );
+
+
+.select2-container--bootstrap .select2-results__option[aria-selected=true]{
+  @extend .select2-results__option--highlighted
+}
+
+.select2-container--bootstrap .btn{
+  z-index: 0;
+}
+
+
+
+input::file-selector-button {
+  @extend .dropzone-container;
+  // @extend .w-100;
+  @extend .btn;
+  @extend .btn-block;
+  @extend .font-weight-400;
+  @extend .muted;
+  margin-bottom: 0.5rem;
+}
