@@ -106,12 +106,7 @@ const OMS_OPTIONS = [
     { value: 'Haydon', label: 'Haydon' },
 ]
 
-type Sku = {
-    label: string
-    value: string
-}
-
-const SKU_OPTIONS: Sku[] = [
+const SKU_OPTIONS = [
     {
         value: 'V2-BHPOSTCARD',
         label: 'Behavioral Health Postcard',
@@ -350,7 +345,7 @@ const REPLACEMENT_OPTIONS: ReplacementOptionGroup[] = [
         value: 'OrderEntryError',
         options: [
             {
-                label: 'Wrong Item Entered in Order Entry',
+                label: 'Wrong Item Entered',
                 value: 'WrongItemEntered'
             },
         ]
@@ -440,21 +435,40 @@ function ReplacementRequest() {
 
 
 
-    const [itemToReplace, setItemToReplace] = useState<ItemToReplace | null>(null)
+    type SelectedItem = {
+        qty: number
+        reason: string
+    }
+    // keyed by item value (SKU)
+    const [itemsToReplace, setItemsToReplace] = useState<Record<string, SelectedItem>>({})
 
-    const qtyToReplaceOptions = Array.from(
-        { length: itemToReplace ? itemToReplace.qty / itemToReplace.packQty : 0 },
-        (_, index) => ({ label: `${(index + 1) * itemToReplace!.packQty}`, value: (index + 1) * itemToReplace!.packQty })
-    )
+    const qtyOptionsFor = (item: ItemToReplace) =>
+        Array.from({ length: Math.floor(item.qty / item.packQty) }, (_, index) => (index + 1) * item.packQty)
 
+    const handleItems = (item: ItemToReplace, checked: boolean) => {
+        setItemsToReplace((previous) => {
+            const next = { ...previous }
+            if (checked) {
+                next[item.value] = { qty: item.qty, reason: '' }
+            } else {
+                delete next[item.value]
+            }
+            return next
+        })
+    }
 
-    const [qtyToSend, setQtyToSend] = useState<number>()
+    const updateItemToReplace = (value: string, changes: Partial<SelectedItem>) => {
+        setItemsToReplace((previous) => ({
+            ...previous,
+            [value]: { ...previous[value], ...changes },
+        }))
+    }
 
-    const [qtyInReturn, setQtyInReturn] = useState<number>()
+    const selectedItems = FAKE_ITEMS_TO_REPLACE.filter((item) => itemsToReplace[item.value])
 
     const [replaceWithDifferentSku, setReplaceWithDifferentSku] = useState<boolean>(false)
 
-    const [skuToReplaceWith, setSkuToReplaceWith] = useState<Sku | null>(null)
+    const [skuToReplaceWith, setSkuToReplaceWith] = useState<string>('')
 
     const [requestedBy, setRequestedy] = useState<string>('')
 
@@ -505,7 +519,6 @@ function ReplacementRequest() {
                 <Row>
                     <Col className='m-auto'>
                         <Form className='my-3' onSubmit={handleSubmit}>
-
                             <FormGroup className='form-group form-row' as={Row}>
 
                                 <Col className='col-sm'>
@@ -544,7 +557,7 @@ function ReplacementRequest() {
                                     />
                                 </Col>
                                 <Col sm={3}>
-                                    <Form.Control type='text' disabled={!omsInput} placeholder='Enter order id from selected OMS' required value={orderIdInput} onChange={(e) => setOrderIdInput(e.target.value)} />
+                                    <Form.Control type='text' placeholder='Enter order id from selected OMS' required value={orderIdInput} onChange={(e) => setOrderIdInput(e.target.value)} />
                                 </Col>
                                 <Col className='col-sm-auto'>
                                     <IconButton variant='secondary' onClick={() => handleSearchOrderId()}>
@@ -561,48 +574,79 @@ function ReplacementRequest() {
                                     <legend>
                                         <span>Replacement Request for {oms} order {orderId}</span>
                                     </legend>
-                                    <Form.Group as={Row}>
-                                        <Form.Label column sm={4}>Return required</Form.Label>
-                                        <Col sm={8}>
-                                            <Switch name='return' checked={returnRequired} onChange={(e) => setReturnRequired(e.target.checked)} togglerFor='returnRequired' />
-                                        </Col>
-                                    </Form.Group>
-                                    <Form.Group controlId='item' as={Row}>
-                                        <Form.Label column sm={4}>Item to Replace</Form.Label>
-                                        <Col sm={8}>
 
-                                            <Select
-                                                classNames={{
-                                                    clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
-                                                    container: () => 'select2-container--bootstrap',
-                                                    control: () => 'input-group border-0 select2-selection select2-selection--multiple',
-                                                    input: () => '',
-                                                    placeholder: () => 'text-muted',
-                                                    dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
-                                                    valueContainer: () => 'form-control border-right-0',
-                                                    indicatorSeparator: () => 'd-none',
-                                                    indicatorsContainer: () => 'input-group-append',
-                                                    multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
-                                                    multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
-                                                    multiValueLabel: () => 'pr-2 pl-0',
-                                                    menuList: () => 'select2-results__options',
-                                                    option: () => 'select2-results__option',
-                                                }}
-                                                options={FAKE_ITEMS_TO_REPLACE}
-                                                value={itemToReplace}
-                                                onChange={(option) => {
-                                                    setItemToReplace(option)
-                                                    setQtyToSend(undefined)
-                                                }}
-                                            />
-                                        </Col>
-                                    </Form.Group>
-
-
-
-
-
-
+                                    <Table>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Item</th>
+                                                <th>Qty Ordered</th>
+                                                <th>Qty to Replace</th>
+                                                <th>Reason</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {FAKE_ITEMS_TO_REPLACE.map((item) => {
+                                                const selected = itemsToReplace[item.value]
+                                                return (
+                                                    <tr key={item.value}>
+                                                        <td>
+                                                            <input
+                                                                type='checkbox'
+                                                                id={item.value}
+                                                                name={item.value}
+                                                                value={item.value}
+                                                                checked={!!selected}
+                                                                onChange={(e) => handleItems(item, e.target.checked)}
+                                                            />
+                                                        </td>
+                                                        <td>
+                                                            <label htmlFor={item.value}>
+                                                                <span className='h6'>{item.value}</span><br />
+                                                                <span className='small muted'>{item.label}</span>
+                                                            </label>
+                                                        </td>
+                                                        <td>{item.qty}</td>
+                                                        <td>
+                                                            <select
+                                                                className='form-control'
+                                                                disabled={!selected}
+                                                                value={selected ? selected.qty : ''}
+                                                                onChange={(e) => updateItemToReplace(item.value, { qty: Number(e.target.value) })}
+                                                            >
+                                                                {!selected && <option value=''>0</option>}
+                                                                {qtyOptionsFor(item).map((qty) => (
+                                                                    <option key={qty} value={qty}>{qty}</option>
+                                                                ))}
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select
+                                                                className='form-control'
+                                                                disabled={!selected}
+                                                                required={!!selected}
+                                                                value={selected ? selected.reason : ''}
+                                                                onChange={(e) => updateItemToReplace(item.value, { reason: e.target.value })}
+                                                            >
+                                                                <option value=''>Select a reason</option>
+                                                                {REPLACEMENT_OPTIONS.map((group) =>
+                                                                    group.options ? (
+                                                                        <optgroup key={group.value} label={group.label}>
+                                                                            {group.options.map((option) => (
+                                                                                <option key={option.value} value={option.value}>{option.label}</option>
+                                                                            ))}
+                                                                        </optgroup>
+                                                                    ) : (
+                                                                        <option key={group.value} value={group.value}>{group.label}</option>
+                                                                    )
+                                                                )}
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </Table>
 
                                     <Form.Group controlId='replaceWithDifferentSku' as={Row}>
                                         <Form.Label column sm={4}>Replace with different SKU?</Form.Label>
@@ -612,61 +656,36 @@ function ReplacementRequest() {
                                     </Form.Group>
 
                                     {replaceWithDifferentSku &&
-                                        <div>
-                                            <Form.Group controlId='skuToReplaceWith' as={Row}>
-                                                <Form.Label column sm={4}>SKU to replace with</Form.Label>
-                                                <Col sm={8}>
-                                                    <Select
-                                                        classNames={{
-                                                            clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
-                                                            container: () => 'select2-container--bootstrap',
-                                                            control: () => 'input-group border-0 select2-selection select2-selection--multiple',
-                                                            input: () => '',
-                                                            placeholder: () => 'text-muted',
-                                                            dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
-                                                            valueContainer: () => 'form-control border-right-0',
-                                                            indicatorSeparator: () => 'd-none',
-                                                            indicatorsContainer: () => 'input-group-append',
-                                                            multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
-                                                            multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
-                                                            multiValueLabel: () => 'pr-2 pl-0',
-                                                            menuList: () => 'select2-results__options',
-                                                            option: () => 'select2-results__option',
-                                                        }}
-                                                        placeholder='Select a SKU'
-                                                        options={SKU_OPTIONS}
-                                                        value={SKU_OPTIONS.find((option) => option.value === skuToReplaceWith?.value) ?? null}
-                                                        onChange={(option) => setSkuToReplaceWith(option ?? null)}
-                                                    />
-                                                </Col>
-                                            </Form.Group>
-                                        </div>
-
-
-                                    }
-                                    <Form.Group controlId='qtyToSend' as={Row}>
-                                        <Form.Label column sm={4}>Qty to Replace</Form.Label>
-                                        <Col sm={8}>
-                                            <Form.Control
-                                                type='number'
-                                                value={qtyToSend}
-                                                onChange={(e) => setQtyToSend(Number(e.target.value))}
-                                            />
-                                        </Col>
-                                    </Form.Group>
-
-                                    {returnRequired &&
-                                        <Form.Group controlId='qtyInReturn' as={Row}>
-                                            <Form.Label column sm={4}>Qty Expected in Return</Form.Label>
+                                        <Form.Group controlId='skuToReplaceWith' as={Row}>
+                                            <Form.Label column sm={4}>SKU to replace with: </Form.Label>
                                             <Col sm={8}>
-                                                <Form.Control
-                                                    type='number'
-                                                    value={qtyInReturn}
-                                                    onChange={(e) => setQtyInReturn(Number(e.target.value))}
+                                                <Select
+                                                    classNames={{
+                                                        clearIndicator: () => 'border-top border-bottom btn-icon btn justify-content-center align-items-center',
+                                                        container: () => 'select2-container--bootstrap',
+                                                        control: () => 'input-group border-0 select2-selection select2-selection--multiple',
+                                                        input: () => '',
+                                                        placeholder: () => 'text-muted',
+                                                        dropdownIndicator: () => 'btn btn-light text-body btn-icon justify-content-center align-items-center',
+                                                        valueContainer: () => 'form-control border-right-0',
+                                                        indicatorSeparator: () => 'd-none',
+                                                        indicatorsContainer: () => 'input-group-append',
+                                                        multiValueRemove: () => 'bg-transparent select2-selection__choice__remove m-0',
+                                                        multiValue: () => 'multiValue select2-selection__choice p-0 mt-0 ml-0 mr-1 flex-row-reverse',
+                                                        multiValueLabel: () => 'pr-2 pl-0',
+                                                        menuList: () => 'select2-results__options',
+                                                        option: () => 'select2-results__option',
+                                                    }}
+                                                    placeholder='Select a SKU'
+                                                    options={SKU_OPTIONS}
+                                                    value={SKU_OPTIONS.find((option) => option.value === sku) ?? null}
+                                                    onChange={(option) => setSku(option?.value ?? '')}
                                                 />
                                             </Col>
                                         </Form.Group>
+
                                     }
+
                                     <Form.Group controlId='reasonForReplacement' as={Row}>
                                         <Form.Label column sm={4}>Reason for Replacement</Form.Label>
                                         <Col sm={8}>
@@ -777,7 +796,12 @@ function ReplacementRequest() {
                                         </Col>
                                     </Form.Group>
 
-
+                                    <Form.Group as={Row}>
+                                        <Form.Label column sm={4}>Return required</Form.Label>
+                                        <Col sm={8}>
+                                            <Switch name='return' checked={returnRequired} onChange={(e) => setReturnRequired(e.target.checked)} togglerFor='returnRequired' />
+                                        </Col>
+                                    </Form.Group>
 
                                     <Form.Group as={Row}>
                                         <Form.Label column sm={4}>Supporting Documents</Form.Label>
@@ -790,7 +814,7 @@ function ReplacementRequest() {
 
                                         </Col>
                                     </Form.Group>
-                                    <Button type='submit'>Simulate email</Button>
+                                    <Button type='submit'>Submit</Button>
                                 </fieldset>
                             }
                             {!searchedOrderId &&
@@ -808,13 +832,19 @@ function ReplacementRequest() {
                     <Modal.Body>
                         {oms && <p><strong>OMS: </strong>{oms}</p>}
                         {orderId && <p><strong>Order ID: </strong>{orderId}</p>}
-                        <i className='d-block pb-3'>Show full order details?</i>
-                        {returnRequired && <p><strong>Return Required?: </strong>Yes</p>}
-                        {!returnRequired && <p><strong>Return Required?: </strong>No</p>}
-                        {itemToReplace && <p><strong>Item to Replace: </strong>{itemToReplace.value} | {itemToReplace.label}</p>}
-                        {skuToReplaceWith && <p><strong>Item to Replace: </strong>{skuToReplaceWith.value} | {skuToReplaceWith.label}</p>}
-                        {qtyToSend && <p><strong>Qty to Replace: </strong>{qtyToSend}</p>}
-                        {qtyInReturn && <p><strong>Qty Expected in Return: </strong>{qtyInReturn}</p>}
+                        {selectedItems.length > 0 &&
+                            <>
+                                <strong>Items to Replace: </strong>
+                                <ul>
+                                    {selectedItems.map((item) => (
+                                        <li key={item.value}>
+                                            {item.value} | {item.label} | Qty: {itemsToReplace[item.value].qty}
+                                            {itemsToReplace[item.value].reason && <> | Reason: {flatOptions.find((option) => option.value === itemsToReplace[item.value].reason)?.label}</>}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        }
                         {reasons.length > 0 &&
                             <>
                                 <strong>Reason for Request: </strong>
@@ -837,6 +867,7 @@ function ReplacementRequest() {
                         {requestedBy && <p><strong>Originally Requested By: </strong>{requestedBy}</p>}
                         {shippingMethod && <p><strong>Shipping Method: </strong>{shippingMethod}</p>}
                         {account && <p><strong>Shipping Account: </strong>{account}</p>}
+                        {returnRequired && <p><strong>Return Required?: </strong>{returnRequired}</p>}
                         {supportingDocs && <p><strong>Supporting Docs: </strong>{supportingDocs}</p>}
                     </Modal.Body>
                     <Modal.Footer>
@@ -848,9 +879,62 @@ function ReplacementRequest() {
 
 
 
+                <Modal show={showEmail} onHide={handleCloseEmail} size="lg">
+                    <Modal.Header>
+                        <Modal.Title>Please review the replacement request for {oms}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {oms && <p><strong>OMS: </strong>{oms}</p>}
+                        {orderId && <p><strong>Order ID: </strong>{orderId}</p>}
+                        {selectedItems.length > 0 &&
+                            <>
+                                <strong>Items to Replace: </strong>
+                                <ul>
+                                    {selectedItems.map((item) => (
+                                        <li key={item.value}>
+                                            {item.value} | {item.label} | Qty: {itemsToReplace[item.value].qty}
+                                            {itemsToReplace[item.value].reason && <> | Reason: {flatOptions.find((option) => option.value === itemsToReplace[item.value].reason)?.label}</>}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        }
+                        {reasons.length > 0 &&
+                            <>
+                                <strong>Reason for Request: </strong>
+                                <ul>
+                                    {reasons.map((reason) => (
+                                        <li key={reason.name}>{reason.label}
+                                            <ul>
+                                                {reason.subOptions.map((subReason) => (
+                                                    <li key={subReason.name}>
+                                                        {subReason.label}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+
+                        }
+                        {requestedBy && <p><strong>Originally Requested By: </strong>{requestedBy}</p>}
+                        {shippingMethod && <p><strong>Shipping Method: </strong>{shippingMethod}</p>}
+                        {account && <p><strong>Shipping Account: </strong>{account}</p>}
+                        {returnRequired && <p><strong>Return Required?: </strong>{returnRequired}</p>}
+                        {supportingDocs && <p><strong>Supporting Docs: </strong>{supportingDocs}</p>}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleCloseEmail}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+
 
             </Container>
-            {/* <Throbber visibility={isLoading ? 'show' : 'hide'} /> */}
+                        {/* <Throbber visibility={isLoading ? 'show' : 'hide'} /> */}
 
         </div>
     )

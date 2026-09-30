@@ -151,12 +151,26 @@ $theme-colors: map-merge(
 
 
 
-input::file-selector-button {
-  @extend .dropzone-container;
-  // @extend .w-100;
-  @extend .btn;
-  @extend .btn-block;
-  @extend .font-weight-400;
-  @extend .muted;
-  margin-bottom: 0.5rem;
+// input::file-selector-button {
+//   // display: none
+//   // @extend .dropzone-container;
+//   // @extend .w-100;
+//   // @extend .btn;
+//   // @extend .btn-block;
+//   // @extend .font-weight-400;
+//   // @extend .muted;
+//   // margin-bottom: 0.5rem;
+// }
+
+
+.ui-pnotify{
+  .alert{
+    margin: 1rem;
+    width: 500px;
+    min-height: 75px;
+    display: flex;
+    div{
+          margin-block: auto !important;
+    }
+  }
 }

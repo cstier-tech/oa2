@@ -8,7 +8,7 @@ const Main = forwardRef(function Main({ children, pageClass, pageTitle, hasPageM
         
             <div id="content-wrapper">
                 <Container as="section" id="content">
-                    <Row id="content-Main">
+                    <Row id="content-main">
                         <Col id="content-center" lg={12}>
                             <div className={`page ${pageClass || ''}`}>
                                 {pageTitle &&
@@ -17,7 +17,7 @@ const Main = forwardRef(function Main({ children, pageClass, pageTitle, hasPageM
                                     </div>
                                 }
                                 {hasPageMain
-                                    ? <div className={`page-Main ${pageMainClass}`}>
+                                    ? <div className={`page-main ${pageMainClass}`}>
                                         <div ref={ref} data-export-region style={{ display: 'contents' }}>
                                             {children}
                                         </div>
