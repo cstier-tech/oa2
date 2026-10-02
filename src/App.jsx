@@ -22,8 +22,10 @@ import PlainLayout from './components/shared/_PlainLayout.jsx';
 import RedirectSimulation from './components/customer/login/_RedirectSimulation.jsx';
 import ProtectedRoute from './components/shared/_ProtectedRoute.jsx';
 import HomePage from './components/home/_HomePage.jsx';
-import ReplacementRequest from './components/forms/ReplacementRequest/ReplacementRequest.tsx';
-
+import ReplacementRequest from './components/replacement_request/ReplacementRequest.tsx';
+// import ReplacementApproval from './components/replacement_request/ReplacementApproval.tsx';
+import ReplacementRequestDashboard from './components/replacement_request/ReplacementRequestDashboard.tsx';
+import ReplacementView from './components/replacement_request/ReplacementView.tsx';
 
 function App() {
   const exportRegionRef = useRef(null);
@@ -49,6 +51,9 @@ function App() {
         <Route path="/regular-login" element={<DefaultLoginPage onLogin={() => setIsLoggedIn(true)} />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/replacement-request-form" element={<ReplacementRequest />} />
+        {/* <Route path="/replacement-approval" element={<ReplacementApproval />} /> */}
+        <Route path="/replacement-requests" element={<ReplacementRequestDashboard />} />
+        <Route path="/replacement-view" element={<ReplacementView />} />
       </Route>
 
       {/* Sibling of the layout route above, not nested inside it, so it renders on its own -
